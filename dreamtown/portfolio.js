@@ -11,8 +11,8 @@
     {id:'goals', label:'Direction', title:'What I’m working toward', description:'The values that guide my next steps.'}
   ];
   const skillGroups = [
-    {id:'analytics',name:'Data & analytics',description:'Preparing data, exploring patterns, and communicating what the data means.',names:['Power BI','SQL','Python','SAP']},
-    {id:'web',name:'Web foundations',description:'Building interfaces and understanding how a web experience fits together.',names:['HTML','CSS']},
+    {id:'analytics',name:'Data & analytics',description:'Preparing data, exploring patterns, and communicating what the data means.',names:['Power BI','Tableau','SQL','Python','SAP']},
+    {id:'web',name:'Web & backend',description:'Building interfaces and working with server-side APIs.',names:['HTML','CSS','NestJS']},
     {id:'systems',name:'Systems & networking',description:'Tools I have explored through computer science coursework.',names:['Linux','Packet Tracer']}
   ];
   const gallery = [

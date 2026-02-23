@@ -1,4 +1,4 @@
-# Eli’s Dreamtown
+# Eli’s Portfolio Town
 
 A standalone pink pixel-art portfolio with walkable buildings and a professional reading view.
 
@@ -14,13 +14,13 @@ About → Selected work → Skills → Background → Contact. Gallery, Interest
 
 Project case studies cover NAMFREL BARMM election analytics, TechZone 2.0, JOSE documentation, and ongoing WAHgyu quality analysis. See `CONTENT_SOURCES.md` for the evidence behind the summaries.
 
-Photo previews and skill logos are pixel-rendered at runtime. Original photographs can be opened at full detail.
+Photographs display clearly in the portfolio and can be opened at full detail. Skill logos use a pixel treatment to match the game world.
 
 ## Edit
 
 - `content.js`: original education, skills, favorites, and links.
 - `projects.js`: project context, personal contributions, images, and source links.
-- `portfolio.js`: section navigation, case studies, gallery, pixel previews, and room content.
+- `portfolio.js`: section navigation, case studies, gallery, and room content.
 - `portfolio.css`: professional reading view and responsive content layouts.
 - `app.js`: town, room layouts, controls, collisions, and scenery.
 - `style.css`: pink game theme and loading/start screen.

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NestJS-inspired nest mark">
+  <rect width="64" height="64" rx="10" fill="#fff7f8"/>
+  <path d="M32 6 54 18v27L32 58 10 45V18Z" fill="#df3151"/>
+  <path d="M20 43V21l12 15V21m12 0v22L32 28" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+</svg>

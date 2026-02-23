@@ -13,14 +13,13 @@ The portfolio is designed as an interactive, visual-first experience that combin
 - Live guestbook wall
 
 ## Tech Stack
-- Portfolio: HTML, CSS, JavaScript, and original pixel art
-- Earlier frontend: React and TypeScript (`frontend/`)
-- Backend: NestJS
+- Portfolio: HTML, CSS, vanilla JavaScript, Canvas, and original pixel art
+- Guestbook API: NestJS and TypeScript
 - Database: Supabase
 - Hosting: Vercel
 
 ## Project Structure
-- `frontend/` - portfolio UI and interactions
-- `backend/` - Vercel guestbook API and the current portfolio in `public/`
-- `dreamtown/` - interactive portfolio source and content notes
+- `dreamtown/` - source for the live interactive portfolio
+- `frontend/` - Vercel build wrapper and same-origin guestbook route; its earlier React source is inactive
+- `backend/` - NestJS guestbook API and a copy of the portfolio in `public/`
 - `introduction/` - initial static reference files

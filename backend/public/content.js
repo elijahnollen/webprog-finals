@@ -35,10 +35,12 @@ const educationItems = [
 const skillItems = [
   { name: "SAP", image: "/img/sap.png" },
   { name: "Power BI", image: "/img/powerbi.png" },
+  { name: "Tableau", image: "/img/tableau.svg" },
   { name: "SQL", image: "/img/sql.png" },
   { name: "Python", image: "/img/python.png" },
   { name: "CSS", image: "/img/css.png" },
   { name: "HTML", image: "/img/html.png" },
+  { name: "NestJS", image: "/img/nestjs.svg" },
   { name: "Linux", image: "/img/linux.png" },
   { name: "Packet Tracer", image: "/img/cisco-packet-tracer.png" }
 ];

@@ -1,71 +1,27 @@
-# Home Frontend (React + TypeScript + Tailwind, MVC)
+# Interactive Portfolio Frontend
 
-## Stack
-- React + TypeScript + Vite
-- TailwindCSS
-- MVC-style structure inside `src/`
-- REST API calls to NestJS backend on Vercel
-- React Router (`/` and `/resources`)
+The live portfolio is built with HTML, CSS, and vanilla JavaScript. The game world and characters use the browser Canvas API. Its source lives in `../dreamtown/`.
 
-## Migrated Content
-All original `home` content was migrated into React views:
-- About
-- Education
-- Skills
-- Hobbies (movies/books/blogs modal)
-- Goals
-- Guestbook (GET/POST API)
-- Picture Gallery
-- Resources/Attributions page
+This folder is the Vercel deployment wrapper for the portfolio. `npm run build` copies the site from `../dreamtown/` into `dist/`. The serverless route in `api/guestbook.js` forwards guestbook requests to the NestJS backend using a server-side environment variable. The browser calls only `/api/guestbook`.
 
-## Structure
-- `src/models` - domain models and normalizers
-- `src/services` - HTTP and API service layer
-- `src/controllers` - UI/controller hooks and orchestration
-- `src/views` - pages/components (responsive mobile + desktop)
-- `src/config` - environment-based endpoint config
+The older React and TypeScript files under `src/` are retained as an earlier version and are not part of the live build.
 
-## API Contract (default)
-- `GET /guestbook`
-- `POST /guestbook`
+## Preview locally
 
-Expected POST payload:
-```json
-{
-  "name": "Eli",
-  "message": "Hello world",
-  "sticker": "/img/star.png"
-}
+From the repository root, serve the portfolio source with a static file server, for example:
+
+```bash
+python -m http.server 4173 --directory dreamtown
 ```
 
-`name` and `message` are required. `sticker` is optional.
+Open `http://localhost:4173/`. The portfolio itself needs no JavaScript build step. The guestbook requires the deployed API or an equivalent local backend route.
 
-## Environment
-Create `.env` from `.env.example` and set:
+## Build and deploy
 
-`VITE_API_BASE_URL=https://your-nest-api.vercel.app/api`
-
-The frontend will call:
-
-`$VITE_API_BASE_URL/guestbook`
-
-## Run
 ```bash
+cd frontend
 npm install
-npm run dev
-```
-
-## Deploy (Vercel)
-`vercel.json` is included with SPA rewrite support.
-
-Set Vercel project root directory to `home`.
-
-Add env var:
-
-`VITE_API_BASE_URL=https://<your-backend-project>.vercel.app/api`
-
-## Build
-```bash
 npm run build
-npm run preview
 ```
+
+The Vercel project uses `frontend/` as its root and `dist/` as its output directory. The guestbook function reads its backend address from the server-side `GUESTBOOK_API_BASE_URL` setting, with `VITE_API_BASE_URL` supported for the existing deployment. Supabase credentials belong only in the backend's environment settings, never in browser code.
