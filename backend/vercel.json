@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/guestbook",
+      "destination": "/api/guestbook"
+    }
+  ],
+  "functions": {
+    "api/[...all].ts": {
+      "maxDuration": 10
+    }
+  }
+}

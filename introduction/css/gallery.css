@@ -1,0 +1,155 @@
+/* Full-screen wrapper for the gallery section */
+.gallery-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Define base pivot distance */
+    --pivot-y: 800px;
+}
+
+/* Structural container */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Shared origin - now using a variable for responsiveness */
+.gallery-wheel, 
+.gallery-item {
+    transform-origin: center var(--pivot-y);
+}
+
+/* The rotating hub */
+.gallery-wheel {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Individual frames */
+.gallery-item {
+    position: absolute;
+    background: white;
+    border: 3px solid black;
+    padding: 12px;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease;
+}
+
+/* Portrait orientation - adjusted with clamp for fluid sizing */
+.gallery-item.vertical {
+    width: clamp(200px, 60vw, 300px);
+    height: clamp(280px, 80vw, 400px);
+    margin-left: clamp(-150px, -30vw, -100px);
+    border-radius: 15px 50px 20px 45px / 45px 20px 50px 15px;
+}
+
+/* Landscape orientation - adjusted with clamp for fluid sizing */
+.gallery-item.horizontal {
+    width: clamp(250px, 80vw, 450px);
+    height: clamp(180px, 50vw, 300px);
+    margin-left: clamp(-225px, -40vw, -125px);
+    border-radius: 40px 15px 55px 20px / 20px 55px 15px 40px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transform: rotate(-1.5deg);
+}
+
+/* Rotational increments */
+.item-1 { transform: rotate(0deg); }
+.item-2 { transform: rotate(60deg); }
+.item-3 { transform: rotate(120deg); }
+.item-4 { transform: rotate(180deg); }
+.item-5 { transform: rotate(240deg); }
+.item-6 { transform: rotate(300deg); }
+
+/* Navigation buttons - adjusted for mobile visibility */
+.nav-btn {
+    all: unset;
+    position: absolute;
+    top: 70%; 
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.btn-prev { left: 30%; }
+.btn-next { right: 30%; }
+
+.nav-btn .arrow {
+    width: clamp(50px, 15vw, 75px);
+    height: clamp(50px, 15vw, 75px);
+    background: white;
+    color: black !important;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: bold 1.5rem sans-serif;
+    border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+    transition: 0.3s ease;
+}
+
+.nav-btn small {
+    margin-top: 5px;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: black !important;
+}
+
+/* Caption - adjusted size for mobile */
+.gallery-caption {
+    position: absolute;
+    bottom: 100px;
+    font-size: clamp(1.2rem, 5vw, 2.5rem);
+    font-weight: bold !important;
+    color: black !important;
+    text-align: center;
+    width: 100%;
+    pointer-events: none;
+}
+
+
+@media (max-width: 768px) {
+    .gallery-section {
+        /* Move the pivot point closer so the circle is smaller on mobile */
+        --pivot-y: 500px;
+    }
+
+    .gallery-container {
+        height: 400px;
+    }
+
+    /* Move buttons slightly higher so they are clearly visible above the caption */
+    .nav-btn {
+        top: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-section {
+        --pivot-y: 400px;
+    }
+    
+    .btn-prev { left: 5%; }
+    .btn-next { right: 5%; }
+}

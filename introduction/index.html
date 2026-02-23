@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/header-menu.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/education.css">
+    <link rel="stylesheet" href="css/skills.css">
+    <link rel="stylesheet" href="css/hobbies.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/goals.css">
+    <link rel="stylesheet" href="css/guestbook.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Personal Website | Eli </title>
+</head>
+
+    <body>
+        <div class = "header-wrapper">
+        <header class="header-section">
+            <h1>Hi, I'm Eli!</h1>
+        </header>
+
+        <nav class="menu-space" id = "navbar">
+            <a href="#about">About</a>   
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#hobbies">Hobbies</a>
+            <a href="#goals">Goals</a>
+            <a href="#app">Guestbook</a>
+            <a href="#gallery">Picture Gallery</a>
+            <a href="resources.html">Resources</a>
+        </nav>
+        </div>
+        
+        
+        <main data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="30">
+            <div class="background-container" id="about">
+                <img src="img/me-nobg.png" alt="Eli" class="left-character body-behind"> 
+                <img src="img/me-nobg.png" alt="Eli" class="left-character head-overlap">
+                <div class="content-area">
+                    <blockquote class="custom-quote">
+                        Hi! I’m <strong> Elijah Crisehea M. Nollen </strong>, you can call me Eli. A student passionate about analytics and turning data into actionable insights. I enjoy exploring patterns and solving problems. Fun fact: Computer Science wasn’t my first choice, I initially wanted to study Industrial Engineering. But thanks to a scholarship from SM, I ended up in Computer Science, and I’ve grown to love the field even more! Outside of academics, I enjoy reading books and watching movies.
+                    </blockquote>
+
+                </div>
+            </div>
+         
+            <section id="education"> 
+                <div class="direction-container">
+                     <span class="direction-text">Click on a circle</span>
+                </div>
+
+
+                <div class="timeline-wrapper" id="wrapper">
+                    <div class="timeline-line" id="line">
+                        
+                        <div class="item">
+                            <div class="content">
+                                 <h2>Bernardo College</h2>
+                                 <p>I spent most of my junior high school years here. From 7th grade to 9th grade, I was a consistent honor student. I also developed my writing skills by being a part of the school publication.</p>
+                            </div>
+                            <div class="dot"></div>
+                            <span class="date">2018 - 2021</span>
+                        </div>
+
+                         <div class="item">
+                            <div class="content">
+                                <h2>Las Piñas National High School</h2>
+                                <p>I moved to this school to finish my last year of junior high school. I successfully completed 10th grade and was recognized as an honor student for my academic work.</p>
+                            </div>
+                            <div class="dot"></div>
+                            <span class="date">2021 - 2022</span>
+                        </div>
+                        
+                        <div class="item">
+                            <div class="content">
+                                <h2>Philippine Christian University</h2>
+                                <p>For my senior high school, I chose the STEM strand. I was a consistent student with highest honors. I also joined an organization called Layag Films Production, where I was one of the talents.</p>
+                            </div>
+                            <div class="dot"></div>
+                            <span class="date">2022 - 2024</span>
+                        </div>
+
+                        <div class="item">
+                            <div class="content">
+                                <h2>Asia Pacific College</h2>
+                                <p>I am currently a college student taking a Bachelor of Science in Computer Science with a focus on cybersecurity and forensics. I am an SM Scholar and an honor student with a 3.88 GPA in my first year. I also hold a leadership role in an organization called the Junior Philippine Computer Society, where I serve as the Director of Operations.</p>
+                            </div>
+                            <div class="dot"></div>
+                            <span class="date">2024 - 2028</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <div class="skills-container">
+                    <h3 class="skills-title">IT Experience</h3>
+                    <div class="skills-box">
+                        <div class="base-layer">
+                            <img src="img/sap.png" class="skills-icon" alt="SAP">
+                            <img src="img/powerbi.png" class="skills-icon" alt="Power BI">
+                            <img src="img/sql.png" class="skills-icon" alt="SQL">
+                            <img src="img/python.png" class="skills-icon" alt="Python">
+                            <img src="img/css.png" class="skills-icon" alt="CSS">
+                            <img src="img/html.png" class="skills-icon" alt="HTML">
+                            <img src="img/linux.png" class="skills-icon" alt="Linux">
+                            <img src="img/cisco-packet-tracer.png" class="skills-icon" alt="Packet Tracer">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id = "hobbies" class="hobbies-section">
+                <div class="container">
+                    <h3 class="skills-title">My Hobbies</h3>
+                    <div class="hobbies-grid">
+                        <div class="hobby-item">
+                            <div class="hobby-icon-box">
+                                <img src="img/movies.png" alt="Movies">
+                            </div>
+                            <button class="doodle-btn" data-bs-toggle="modal" data-bs-target="#moviesModal">Movies</button>
+                        </div>
+                        
+                        <div class="hobby-item">
+                            <div class="hobby-icon-box">
+                                <img src="img/books.png" alt="Books">
+                            </div>
+                            <button class="doodle-btn" data-bs-toggle="modal" data-bs-target="#booksModal">Books</button>
+                        </div>
+                        
+                        <div class="hobby-item">
+                            <div class="hobby-icon-box">
+                                <img src="img/blogs.png" alt="Blogs">
+                            </div>
+                            <button class="doodle-btn" data-bs-toggle="modal" data-bs-target="#blogsModal">Blogs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+          <section id="goals" class="goal-page">
+            <div class="goal-grid">
+                <div class="goal-card card-manifesto">
+                    <div class="emoji-pop"><span>☺</span><span>☻</span><span>☺</span></div>
+                    <h3 class="skills-title"> Goals & <br> Dreams</h3>
+                </div>
+                
+                <div class="goal-card card-skills">
+                    <div class="emoji-pop"><span>ツ</span><span>☺</span></div>
+                    <span class="goal-id">01 // SKILLS</span>
+                    <p>Strengthen my <strong>technical and analytical</strong> skills beyond the classroom.</p>
+                </div>
+                
+                <div class="goal-card card-vibe">
+                    <div class="emoji-pop"><span>♥</span><span>☺</span></div>
+                    <span class="goal-id">02 // BALANCE</span>
+                    <p>Maintain balance, <strong>grow academically</strong> while still enjoying life.</p>
+                </div>
+                
+                <div class="goal-card dark-theme">
+                    <div class="emoji-pop"><span>★</span><span>☺</span></div>
+                    <span class="goal-id">03 // IMPACT</span>
+                    <p>Become successful not only financially but also in making a <strong>positive impact</strong>.</p>
+                </div>
+                
+                <div class="goal-card wide-theme">
+                    <div class="emoji-pop"><span>☀</span><span>☺</span><span>ヅ</span></div>
+                    <span class="goal-id">04 // PURPOSE</span>
+                    <p>Live a <strong>purpose-driven life</strong> focused on service, growth, and contribution.</p>
+                </div>
+            </div>
+        </section>
+
+            <div id="app">
+                <section class="doodle-guestbook">
+                    <header class="guestbook-header">
+                        <h3 class="skills-title"> Leave a little trace of yourself! </h3>
+                     </header>
+                     <div class="guestbook-main">
+                        <div class="form-container">
+                            <div class="hand-drawn-box">
+                                <h3>Sign the Guestbook</h3>
+                                <form @submit.prevent="submitForm">
+                                    <input type="text" placeholder="Your Name" v-model="formData.name">
+                                    <input type="email" placeholder="Your Email (optional)" v-model="formData.email">
+            
+                                    <div class="message-area">
+                                        <textarea placeholder="Say something (optional)" v-model="formData.message"></textarea>
+                                        <div class="sticker-dropzone">
+                                            <p v-if="!selectedSticker">Sticker here</p>
+                                            <img v-else :src="selectedSticker" alt="Selected sticker preview" class="active-sticker-preview">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="doodle-submit">SUBMIT</button>
+                                    <div class="guestbook-icons">
+                                        <a href="https://github.com/elijahnollen" target="_blank" class="guest-icon-link" aria-label="GitHub">
+                                            <img src="img/github.png" alt="GitHub" class="custom-icon">
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/elijah-nollen-527563321/" target="_blank" class="guest-icon-link" aria-label="LinkedIn">
+                                            <img src="img/linkedin.png" alt="LinkedIn" class="custom-icon">
+                                        </a>
+                                        <a href="mailto:emnollen@student.apc.edu.ph" class="guest-icon-link" aria-label="Email">
+                                            <img src="img/outlook.png" alt="Email" class="custom-icon">
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sticker-container">
+                            <div class="hand-drawn-box sticker-board">
+                                <h3>Sticker Box</h3>
+                                <div class="sticker-grid">
+                                    <img 
+                                    v-for="(src, index) in stickerAssets" 
+                                    :key="index" 
+                                    :src="src" 
+                                    @click="selectedSticker = src"
+                                    :class="{ 'is-selected': selectedSticker === src }"
+                                    class="doodle-sticker"
+                                    >
+                                </div>
+                                <p class="hint-text">(Click a sticker to add it!)</p>
+                            </div>
+                        </div>
+                     </div>
+                    </section>
+                </div>
+            
+            <section id="gallery" class="gallery-section">
+                <button class="nav-btn btn-prev" onclick="rotateGallery('prev')">
+                    <span class="arrow"> &lt; </span>
+                    <small>BACK</small>
+                </button>
+                <div class="gallery-container">
+                    <div class="gallery-wheel" id="wheel">
+                        <div class="gallery-item item-1 vertical">
+                            <img src="img/minnie.jpg" alt="Portrait">
+                        </div>
+                        <div class="gallery-item item-2 horizontal">
+                            <img src="img/JPCS_general_assembly.JPG" alt="Landscape">
+                        </div>
+                        <div class="gallery-item item-3 vertical">
+                            <img src="img/sea.jpg" alt="Portrait">
+                        </div>
+                        <div class="gallery-item item-4 horizontal">
+                            <img src="img/layag.jpg" alt="Landscape">
+                        </div>
+                        <div class="gallery-item item-5 vertical">
+                            <img src="img/paragliding.jpg" alt="Portrait">
+                        </div>
+                        <div class="gallery-item item-6 horizontal">
+                            <img src="img/rai.jpg" alt="Landscape">
+                        </div>
+                    </div>
+                </div>
+                <button class="nav-btn btn-next" onclick="rotateGallery('next')">
+                    <span class="arrow"> &gt; </span>
+                    <small>NEXT</small>
+                </button>
+                <h3 class="gallery-caption" id="caption">Picture Gallery</h3>
+            </section>
+
+            
+            
+            
+            <div class="modal fade" id="moviesModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title fw-bold">Movies/Series </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row g-5">
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/interstellar.jpg" alt="Movie">
+                                            <p class="item-label">Interstellar</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/little_women.jpeg" alt="Movie">
+                                            <p class="item-label">Little Women</p>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/anne_with_an_e.jpg" alt="Movie">
+                                            <p class="item-label">Anne with an E</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/avatar.jpg" alt="Movie">
+                                            <p class="item-label">Avatar</p>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/avengers_infinity_war.jpg" alt="Movie">
+                                            <p class="item-label">Avengers: Infinity War</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/pride_and_prejudice.jpg" alt="Movie">
+                                            <p class="item-label">Pride and Prejudice</p>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/the_greatest_showman.jpg" alt="Movie">
+                                            <p class="item-label">The Greatest Showman</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/bar_boys.jpg" alt="Movie">
+                                            <p class="item-label">Bar Boys</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="booksModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title fw-bold">Bookshelf</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row g-5">
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/a_thousand_splendid_suns.jpg" alt="Book">
+                                            <p class="item-label">A Thousand Splendid Suns</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/the_pelican_brief.jpg" alt="Book">
+                                            <p class="item-label">The Pelican Brief</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/Alchemist.jpg" alt="Book">
+                                            <p class="item-label">The Alchemist</p>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/life_of_pi.jpg" alt="Book">
+                                            <p class="item-label">Life of Pi</p>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/the_five_people_you_meet_in_heaven.jpg" alt="Book">
+                                            <p class="item-label">The Five People You Meet in Heaven</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/the_book_thief.jpg" alt="Book">
+                                            <p class="item-label">The Book Thief</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/si.jpg" alt="Book">
+                                            <p class="item-label">Si</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="movie-item text-center">
+                                            <img src="img/anxious_people.jpg" alt="Book">
+                                            <p class="item-label">Anxious People</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="blogsModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title fw-bold">Coming Soon...</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row g-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="js/vue.js"></script>
+        <script src="js/myScript.js"></script>
+    </body>  
+</html>
+    

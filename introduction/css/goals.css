@@ -1,0 +1,134 @@
+
+.goal-page {
+  background-color: #fbfbfa;
+  background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+  background-size: 25px 25px; 
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  font-family: 'Shantell Sans', cursive;
+}
+
+/* The Grid (The Black Lines) */
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  max-width: 1100px;
+  width: 100%;
+  background: #37352f; /* Grid line color */
+  gap: 3px; /* Grid thickness */
+  border: 4px solid #37352f;
+}
+
+/* Individual Cards */
+.goal-card {
+  background: white;
+  padding: 50px 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 280px; 
+  transition: background 0.3s ease;
+  cursor: crosshair;
+}
+
+/* Header Card */
+.card-manifesto {
+  grid-column: span 3;
+  text-align: center;
+  background: #fffef3;
+  padding: 80px 20px;
+}
+
+/* Grid Layout Spans */
+.card-skills { grid-column: span 2; }
+.card-vibe { grid-column: span 1; }
+
+.dark-theme { 
+  grid-column: span 1; 
+  background: #37352f !important; 
+  color: white; 
+}
+
+.wide-theme { grid-column: span 2; }
+
+/* Paragraph Text (Large Editorial Style) */
+.goal-card p {
+  font-size: 5rem; 
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: inherit; 
+}
+
+.dark-theme p {
+  font-weight: 700;
+}
+
+/* ID Labels (01 //, etc) */
+.goal-id {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+/* --- Smiley Interaction --- */
+.emoji-pop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.emoji-pop span {
+  font-size: 4rem;
+  transform: translateY(150%) rotate(-20deg);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover/Touch Trigger */
+.goal-card:hover .emoji-pop, 
+.goal-card:active .emoji-pop {
+  opacity: 1;
+}
+
+.goal-card:hover .emoji-pop span,
+.goal-card:active .emoji-pop span {
+  transform: translateY(0) rotate(10deg);
+}
+
+.goal-card:hover {
+  background-color: #f9f9f9;
+}
+
+.dark-theme:hover {
+  background-color: #222 !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 850px) {
+  .goal-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 3px; 
+  }
+  .goal-card {
+    min-height: auto;
+    padding: 40px 30px;
+  }
+  .goal-card p {
+    font-size: 1.6rem;
+  }
+}
