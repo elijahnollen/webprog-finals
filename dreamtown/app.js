@@ -9,7 +9,7 @@ const places=[
  {id:'goals',name:'The Wishing Garden',sub:'Goals & big dreams',x:155,y:490,w:145,h:105,color:'#d4b5e2',roof:'#aa7bb8',sign:'WISHING GARDEN',icon:'✿'},
  {id:'gallery',name:'The Memory House',sub:'Snapshots of my world',x:390,y:510,w:145,h:100,color:'#f8d09d',roof:'#d78e81',sign:'MEMORY HOUSE',icon:'▧'},
  {id:'projects',name:'The Idea Atelier',sub:'A work in progress',x:715,y:515,w:150,h:100,color:'#efb2cd',roof:'#b96992',sign:'IDEA ATELIER',icon:'✎'},
- {id:'contact',name:'The Post Office',sub:'Let’s stay in touch',x:965,y:500,w:140,h:100,color:'#f3afbe',roof:'#d75d7d',sign:'LOVE LETTERS',icon:'✉'}
+ {id:'contact',name:'The Post Office',sub:'Let’s stay in touch',x:965,y:500,w:140,h:100,color:'#f3afbe',roof:'#d75d7d',sign:'POST OFFICE',icon:'✉'}
 ];
 const visited=new Set(),player={x:600,y:470},keys=new Set();let path=[],last=0,near=null,time=0,activeBuilding=null;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
