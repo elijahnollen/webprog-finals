@@ -1,0 +1,41 @@
+// Individually drawn pixel props give each room a distinct purpose and silhouette.
+window.RoomArt=(()=>{
+ const ink='#785568',cream='#fff0dc',wood='#ba8b8e',light='#f6d7cc',rose='#d47ca1',mint='#8bb7ae',lav='#ad95bf';
+ const types=new Set(['journal','podium','server','workbench','bookcart','readingchair','timeline','telescope','camera','album','blueprint','kanban','testbench','mailcounter','pigeonholes','parcels','flowers']);
+ function draw(c,type,x,y,w,h){if(!types.has(type))return false;if(window.DetailedProps?.draw(c,type,x,y,w,h))return true;c.save();c.translate(Math.round(x),Math.round(y));c.scale(w/120,h/110);c.imageSmoothingEnabled=false;
+ const r=(x,y,w,h,color)=>{c.fillStyle=color;c.fillRect(x,y,w,h)},line=(x,y,n,color=ink)=>r(x,y,n,2,color);
+ const paper=(x,y,w,h)=>{r(x+2,y+2,w,h,'#95758055');r(x,y,w,h,cream);for(let i=0;i<3;i++)line(x+4,y+7+i*5,w-9,'#c3a3a6')};
+ const envelope=(x,y,w,h)=>{r(x,y,w,h,cream);for(let i=0;i<w/2;i+=3){r(x+i,y+i/2,3,2,'#d4a7ac');r(x+w-i-3,y+i/2,3,2,'#d4a7ac')}r(x+w-7,y+3,4,5,rose)};
+ const legs=()=>{r(9,82,7,24,ink);r(102,82,7,24,ink);r(11,83,3,20,wood);r(104,83,3,20,wood)};
+ const table=()=>{r(4,68,112,15,wood);r(4,65,112,7,cream);line(7,73,106,light);legs()};
+ r(5,101,110,7,'#76516825');
+ if(type==='journal'){table();r(18,42,45,25,lav);r(20,43,19,21,cream);r(41,43,19,21,'#efd8c1');r(39,42,2,25,ink);for(let i=0;i<3;i++){line(23,48+i*5,12,'#b995a5');line(45,48+i*5,11,'#b995a5')}r(72,47,17,18,rose);r(89,50,6,10,rose);r(91,52,2,6,cream);r(101,21,3,44,ink);r(94,18,19,5,lav);r(90,23,27,10,lav);r(95,31,17,3,cream);r(67,59,24,2,ink)}
+ if(type==='podium'){r(31,29,58,10,ink);r(26,25,68,10,cream);r(35,38,50,62,wood);r(39,42,42,52,light);r(46,52,28,28,lav);r(53,57,14,18,cream);r(56,59,8,3,'#c8ac72');r(50,85,20,2,rose);r(29,99,62,7,ink);r(72,3,3,22,ink);r(66,1,11,5,ink);paper(40,15,25,13)}
+ if(type==='server'){for(const xx of [5,64]){r(xx,2,51,98,ink);r(xx+3,5,45,92,'#a9b9ba');for(let j=0;j<4;j++){r(xx+6,10+j*21,39,17,'#6e7c8c');r(xx+9,13+j*21,23,3,'#b5ccce');r(xx+35,14+j*21,4,4,j===2?rose:'#b6e7b4');for(let i=0;i<4;i++)r(xx+10+i*6,20+j*21,3,2,'#475b70')}r(xx+5,100,8,5,ink);r(xx+38,100,8,5,ink)}r(55,51,8,3,rose);r(59,52,3,36,rose)}
+ if(type==='workbench'){table();r(15,6,88,44,ink);r(19,10,80,35,'#bad5cf');for(let j=0;j<4;j++){line(25,16+j*7,22+(j%2)*17,j%2?rose:'#7699a1')}r(55,50,9,11,wood);r(43,60,33,4,ink);r(19,61,28,3,lav);r(78,56,28,8,lav);for(let i=0;i<5;i++)r(80+i*5,58,2,2,cream);r(5,34,9,25,wood);r(8,29,3,12,ink);r(105,36,10,29,mint)}
+ if(type==='bookcart'){r(13,20,6,75,wood);r(102,20,6,75,wood);for(let j=0;j<2;j++){r(10,53+j*38,101,6,wood);for(let i=0;i<9;i++){const height=21+(i%3)*4;r(23+i*8,53+j*38-height,6,height,[rose,mint,lav,'#d8b071'][i%4]);r(24+i*8,57+j*38-height,4,2,cream)}}r(6,13,20,6,ink);r(12,99,12,8,ink);r(96,99,12,8,ink);r(15,101,6,4,light);r(99,101,6,4,light)}
+ if(type==='readingchair'){r(15,9,72,64,ink);r(19,12,64,58,lav);r(23,16,56,42,'#c8b1d2');r(12,60,78,26,lav);r(7,40,17,41,'#a98ab7');r(78,40,17,41,'#a98ab7');r(9,38,13,6,light);r(80,38,13,6,light);r(23,85,6,18,wood);r(74,85,6,18,wood);r(28,29,29,25,cream);r(31,32,23,19,'#e8b4c4');r(57,61,23,24,rose);for(let i=0;i<4;i++)line(59,65+i*5,18,light);r(99,72,19,5,cream);r(106,76,5,27,wood);r(103,53,11,18,mint)}
+ if(type==='timeline'){r(6,5,109,74,wood);r(10,9,101,66,cream);line(20,42,81,lav);for(let i=0;i<3;i++){r(25+i*32,38,8,8,rose);paper(18+i*32,17,23,16);paper(18+i*32,50,23,16)}r(19,80,5,26,wood);r(96,80,5,26,wood);r(16,102,13,4,ink);r(92,102,13,4,ink)}
+ if(type==='telescope'){for(let i=0;i<12;i++){r(41-i*2,60+i*4,5,5,wood);r(66+i*2,60+i*4,5,5,wood)}r(54,48,7,56,ink);r(47,42,20,15,wood);for(let i=0;i<12;i++){r(21+i*5,38-i*2,13,18,lav);r(22+i*5,39-i*2,12,4,light)}r(84,12,15,25,ink);r(88,13,8,21,mint);r(15,38,12,15,ink);r(17,41,8,9,rose);r(53,57,10,5,rose)}
+ if(type==='camera'){r(39,49,5,51,ink);for(let i=0;i<12;i++){r(40-i*2,56+i*4,4,5,wood);r(42+i*3,56+i*4,4,5,wood)}r(11,15,73,37,ink);r(15,19,65,29,'#c3a9bc');r(18,12,21,8,wood);r(19,24,18,6,cream);r(43,18,29,31,ink);r(48,23,19,21,'#a1c5cf');r(51,27,13,12,'#5e7c91');r(54,28,5,5,'#daeff0');r(73,15,6,5,rose);r(89,65,27,31,wood);r(93,69,19,22,cream);r(96,72,13,12,mint);line(95,88,16,rose)}
+ if(type==='album'){table();r(12,27,96,38,wood);r(16,23,42,39,cream);r(61,23,42,39,'#f4e1cd');r(57,24,4,39,rose);for(const xx of [21,67]){r(xx,28,29,22,'#bba0be');r(xx+3,31,23,16,mint);r(xx+15,33,5,5,cream);for(let i=0;i<3;i++)r(xx+2+i*6,44-i*3,9,3,'#6d9a8d');line(xx,55,28,'#bb939d')}r(90,10,18,14,rose);r(93,12,12,10,cream)}
+ if(type==='blueprint'){table();r(8,23,102,40,'#739aa5');for(let j=0;j<5;j++)line(12,27+j*7,91,'#a4cbd0');for(let i=0;i<8;i++)r(16+i*12,25,1,35,'#a4cbd0');r(22,33,27,18,cream);r(26,36,19,12,'#739aa5');r(66,31,31,23,cream);r(70,35,23,15,'#739aa5');line(48,42,18,cream);r(13,20,5,46,'#d5e6df');r(105,20,5,46,'#d5e6df');r(29,59,61,4,wood);for(let i=0;i<7;i++)r(32+i*8,59,1,3,ink);r(99,50,3,16,rose)}
+ if(type==='kanban'){r(2,2,116,79,ink);r(6,6,108,71,'#c2aa93');for(let i=0;i<3;i++){r(12+i*34,12,28,8,[lav,rose,mint][i]);for(let j=0;j<3-i%2;j++){r(14+i*34,26+j*15,24,12,[cream,'#f2c3cf','#c2dbcf'][i]);line(18+i*34,30+j*15,15,'#a8888d')}}r(14,81,5,26,wood);r(100,81,5,26,wood);r(49,80,22,5,rose)}
+ if(type==='testbench'){table();r(5,6,63,43,ink);r(9,10,55,34,'#c5ddd4');for(let j=0;j<3;j++){r(13,15+j*9,5,5,mint);line(22,17+j*9,31,'#7d9e9c')}r(30,50,9,12,ink);r(19,60,31,4,wood);r(81,20,23,41,ink);r(84,23,17,33,'#e7ccd9');r(89,28,7,9,mint);r(89,42,7,3,rose);r(90,58,5,2,cream);r(57,55,20,9,lav);for(let i=0;i<4;i++)line(60,57+i*2,13,cream)}
+ if(type==='mailcounter'){r(5,48,109,54,wood);r(9,53,101,43,light);for(let i=0;i<3;i++){r(14+i*32,58,27,32,'#d59aa9');r(25+i*32,62,5,3,cream)}r(1,43,117,8,cream);r(11,18,37,24,rose);r(15,22,29,16,ink);line(18,28,23,cream);envelope(62,29,27,13);r(95,22,15,20,mint);r(99,7,5,16,wood);r(92,5,19,6,rose);r(10,100,9,6,ink);r(101,100,9,6,ink)}
+ if(type==='pigeonholes'){r(9,1,103,102,wood);r(13,5,95,92,ink);for(let j=0;j<4;j++)for(let i=0;i<3;i++){r(16+i*30,9+j*22,26,18,'#a77b82');if((i+j)%3!==1)envelope(18+i*30,16+j*22,22,10);line(22+i*30,10+j*22,13,'#edc9b7')}r(8,99,106,6,cream)}
+ if(type==='parcels'){for(const [xx,yy,ww,hh,col]of [[3,57,48,43,'#cea480'],[55,44,59,56,'#dbb799'],[12,22,38,32,'#e1c4a5'],[68,14,34,27,'#cea480']]){r(xx+2,yy+2,ww,hh,ink);r(xx,yy,ww,hh,col);r(xx+ww/2-3,yy,6,hh,'#f5dec3');line(xx,yy+5,ww,'#b88e75');r(xx+6,yy+hh/2,14,10,cream);line(xx+8,yy+hh/2+3,10,'#b89e9a')}envelope(71,75,31,16)}
+ if(type==='flowers'){r(8,70,105,28,'#c18d9a');r(12,75,97,20,'#e1a9b7');r(7,66,108,7,cream);for(let i=0;i<7;i++){const xx=19+i*13,yy=18+(i%3)*12;r(xx,yy+4,3,43-(i%3)*12,'#789c78');r(xx-6,yy+20,8,4,mint);r(xx+2,yy+12,8,4,mint);r(xx-6,yy-3,15,5,[rose,lav,cream][i%3]);r(xx-2,yy-7,7,14,[rose,lav,cream][i%3]);r(xx,yy-2,3,3,'#e9c176')}r(17,98,7,8,wood);r(97,98,7,8,wood)}
+ c.restore();return true}
+ function floor(c,id,l){if(id==='about')return false;const r=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)};
+  if(id==='education'){r(400,490,410,100,'#b49ac2');r(408,498,394,84,'#dbc6dd');for(let i=0;i<9;i++){r(423+i*42,504,2,71,'#b49ac2');r(415+i*42,540,18,2,'#b49ac2')}}
+  if(id==='skills'){r(235,470,300,100,'#9fbfb7');r(242,477,286,86,'#c2d6c7');for(let i=0;i<5;i++){r(560+i*27,515+i*8,23,3,'#91afa5');r(580+i*27,515+i*8,3,24,'#91afa5')}}
+  if(id==='hobbies'){r(465,350,270,315,'#aa5c84');r(477,350,6,315,'#e4ba92');r(717,350,6,315,'#e4ba92');for(let yy=370;yy<650;yy+=24)for(let xx=510;xx<710;xx+=42)r(xx,yy,3,3,'#e0a4c0');}
+  if(id==='goals'){for(let yy=450;yy<620;yy+=44)for(let xx=400;xx<810;xx+=44){r(xx,yy,40,40,(xx+yy)%88?'#d1c4d7':'#e0d8d5');r(xx+3,yy+3,34,1,'#fff1df99')}}
+  if(id==='gallery'){r(400,500,410,90,'#d3b698');r(406,506,398,78,'#eddbc8');for(let xx=420;xx<800;xx+=25){r(xx,501,7,4,'#fff0df');r(xx,585,7,4,'#fff0df')}}
+  if(id==='projects'){r(365,470,470,145,'#a69aad');r(372,477,456,131,'#cfc3d2');for(let yy=485;yy<604;yy+=17)r(379,yy,441,1,'#a69aad77');for(let xx=380;xx<825;xx+=22)r(xx,480,1,121,'#a69aad77');}
+  if(id==='contact'){r(420,500,360,90,'#d3a19f');r(429,509,342,72,'#f4d8c4');for(let yy=360;yy<640;yy+=46){r(680,yy,5,23,'#d7b0a6');r(685,yy+18,18,5,'#d7b0a6')}for(let xx=350;xx<540;xx+=27)r(xx,422,18,4,'#d7b0a6')}
+  return true;
+ }
+ return {has:type=>types.has(type),draw,floor};
+})();

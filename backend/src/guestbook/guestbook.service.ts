@@ -38,7 +38,7 @@ export class GuestbookService {
       .order("created_at", { ascending: false });
 
     if (error) {
-      throw new InternalServerErrorException(`Failed to load guestbook entries: ${error.message}`);
+      throw new InternalServerErrorException("Guestbook entries are temporarily unavailable.");
     }
 
     return (data ?? []).map((entry) => this.toEntry(entry as GuestbookRow));
@@ -52,6 +52,9 @@ export class GuestbookService {
     if (!name || !message) {
       throw new BadRequestException("Name and message are required.");
     }
+    if (sticker && !/^\/img\/(star|thinking|surprised|lol|in-love|dizzy)\.png$/.test(sticker)) {
+      throw new BadRequestException("Invalid guestbook sticker.");
+    }
 
     const { data, error } = await this.supabase
       .from("guestbook_entries")
@@ -64,7 +67,7 @@ export class GuestbookService {
       .single();
 
     if (error || !data) {
-      throw new InternalServerErrorException(`Failed to create guestbook entry: ${error?.message ?? "Unknown error"}`);
+      throw new InternalServerErrorException("The guestbook note could not be saved right now.");
     }
 
     return this.toEntry(data as GuestbookRow);

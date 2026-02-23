@@ -12,7 +12,7 @@ No build step or dependencies are required. Use WASD or arrow keys to walk, E to
 
 About → Selected work → Skills → Background → Contact. Gallery, Interests, and Direction are optional personal sections. Every game object opens the same canonical content used by the reading view.
 
-Project case studies cover NAMFREL BARMM election analytics, TechZone 2.0, JOSE Modules 4–6, and ongoing WAHgyu quality analysis. See `CONTENT_SOURCES.md` for the evidence behind the summaries.
+Project case studies cover NAMFREL BARMM election analytics, TechZone 2.0, JOSE documentation, and ongoing WAHgyu quality analysis. See `CONTENT_SOURCES.md` for the evidence behind the summaries.
 
 Photo previews and skill logos are pixel-rendered at runtime. Original photographs can be opened at full detail.
 
@@ -25,7 +25,7 @@ Photo previews and skill logos are pixel-rendered at runtime. Original photograp
 - `app.js`: town, room layouts, controls, collisions, and scenery.
 - `style.css`: pink game theme and loading/start screen.
 
-The original frontend and backend remain separate. This version does not connect to the original guestbook database.
+The Post Office guestbook uses the existing NestJS API and Supabase entries when served from the Vercel backend. The browser calls the same-origin `/api/guestbook` route; database credentials remain server-side.
 
 Fonts: DM Sans, Playfair Display, and Press Start 2P via Google Fonts. Personal photographs and media covers come from the original portfolio; the NAMFREL team photo comes from the supplied LinkedIn post; the JOSE artwork comes from the team repository. Original generated game-art briefs are recorded in `ART.md`.
 
