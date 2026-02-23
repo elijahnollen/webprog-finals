@@ -121,7 +121,7 @@
     c.imageSmoothingEnabled=false;
     if(id==='gallery')roomObjects.filter(o=>o.type==='photos').forEach((o,idx)=>{
       rect(o.x-2,o.y-15,o.w+4,o.h+17,'#b67e91',c);rect(o.x+2,o.y-11,o.w-4,o.h+9,'#f8e5d0',c);
-      gallery.slice(idx*3,idx*3+3).forEach((photo,i)=>{const im=cached(photo.image);if(!im.complete||!im.naturalWidth)return;rect(o.x+4+i*36,o.y,32,50,'#fff4e4',c);c.drawImage(im,o.x+7+i*36,o.y+3,26,38)});
+      gallery.filter(photo=>photo.category===(idx?'campus':'personal')).slice(0,3).forEach((photo,i)=>{const im=cached(photo.image);if(!im.complete||!im.naturalWidth)return;rect(o.x+4+i*36,o.y,32,50,'#fff4e4',c);c.drawImage(im,o.x+7+i*36,o.y+3,26,38)});
     });
     if(id==='skills'){
       rect(428,335,264,68,'#fff0dc',c);rect(432,339,256,60,'#ebd8db',c);
