@@ -7,7 +7,7 @@ window.PROJECTS = [
     summary: 'Preparing dependable election data for the BARMM parliamentary election dashboard.',
     context: 'I worked with the Dashboard Team supporting the 2026 BARMM Parliamentary Election. My contribution focused on the quality of the data behind the visual reports.',
     contributions: ['Checked cumulative election-result files and compared changes between releases.', 'Identified duplicate and inconsistent records, and validated relationships.', 'Improved the Power Query preparation workflow with the team.'],
-    takeaway: 'Reliable dashboards begin with understanding how the underlying data changes—not just removing duplicate rows.',
+    takeaway: 'Reliable dashboards begin with understanding how the underlying data changes, not just removing duplicate rows.',
     tools: ['Power Query', 'Power BI', 'Data validation'],
     image: 'img/namfrel-barmm.jpg', imageAlt: 'The NAMFREL election analytics team in front of the election dashboards, from Eli’s LinkedIn post',
     links: [{label: 'Read my project reflection', url: 'https://www.linkedin.com/posts/elijahnollen_i-was-part-of-the-dashboard-team-for-the-ugcPost-7508755510645432322-sdhq/'}]

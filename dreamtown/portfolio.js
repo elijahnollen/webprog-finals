@@ -32,7 +32,7 @@
   const tags = list => '<div class="tags">'+list.map(t=>'<span>'+esc(t)+'</span>').join('')+'</div>';
   const link = item => `<a class="text-link" href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.label)} ↗</a>`;
   function pixel(src,alt,kind='photo',extra='') {
-    return `<span class="pixel-media ${kind} ${extra}"><img data-pixel="${kind}" src="${esc(localImage(src))}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>`;
+    return `<span class="pixel-media ${kind} ${extra}"><img ${kind==='logo'?'data-pixel="logo" ':''}src="${esc(localImage(src))}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>`;
   }
   function paintPixelImage(img) {
     if (!img.complete || !img.naturalWidth || img.dataset.painted) return;
@@ -40,7 +40,7 @@
     // Decode a detached source so layout and lazy-loading cannot crop the bitmap.
     const source=new Image();
     source.onload=()=>{
-      const kind=img.dataset.pixel, longest=kind==='logo'?40:kind==='portrait'?128:180;
+      const longest=40;
       const ratio=source.naturalWidth/source.naturalHeight;
       const display=document.createElement('canvas');
       display.width=ratio>=1?longest:Math.max(1,Math.round(longest*ratio));
@@ -82,7 +82,7 @@
     if(id==='projects') html=`<div class="project-grid">${window.PROJECTS.map(p=>`<article class="project-card"><button class="project-cover ${p.tone}" data-project="${p.id}" aria-label="Read ${esc(p.title)} case study">${p.image?pixel(p.image,p.imageAlt):`<span class="project-monogram">${esc(p.initials)}</span>`}<span class="project-state">${esc(p.status)}</span></button><div class="project-copy"><p class="project-category">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="project-role">${esc(p.role)}</p><p>${esc(p.summary)}</p><button class="text-button" data-project="${p.id}">My contribution →</button></div></article>`).join('')}</div>`;
     if(id==='skills') {const selected=options.group||'all';html=`<div class="filter-row" aria-label="Skill categories">${[{id:'all',name:'All skills'},...skillGroups].map(g=>`<button data-skill-filter="${g.id}" aria-pressed="${selected===g.id}">${g.name}</button>`).join('')}</div>${skillGroups.filter(g=>selected==='all'||selected===g.id).map(g=>`<section class="skill-group"><h3>${g.name}</h3><p>${g.description}</p><div class="skills-grid">${g.names.map(name=>{const sk=C.skillItems.find(s=>s.name===name);return `<div class="skill">${pixel(sk.image,name+' logo','logo')}<span>${esc(name)}</span></div>`}).join('')}</div></section>`).join('')}<p class="supporting-note">See Selected work for how these tools connect to my projects.</p>`;}
     if(id==='education') html=`<div class="education-timeline">${[...C.educationItems].reverse().map((e,i)=>`<article class="timeline-entry"><span class="timeline-dot"></span><small>${e.yearRange}</small><h3>${esc(e.school)}</h3><p>${esc(i===0?'BS Computer Science, with a focus on cybersecurity and forensics. Honor student.':i===1?'STEM strand; graduated with highest honors. Participated in Layag Films Production.':i===2?'Completed my final year of junior high school.':'Junior high school; developed my writing through the school publication.')}</p></article>`).join('')}</div><section class="leadership-note" id="leadership"><p class="section-kicker">LEADERSHIP · JUNIOR PHILIPPINE COMPUTER SOCIETY</p><h3>Secretariat Officer</h3><p>July 2026–present</p><h3>Director of Operations</h3><p>July 2025–July 2026</p></section>`;
-    if(id==='gallery') {const filter=options.filter||'all';html=`<div class="filter-row" aria-label="Gallery categories">${[['all','All moments'],['campus','Campus'],['personal','Personal']].map(([v,l])=>`<button data-gallery-filter="${v}" aria-pressed="${v===filter}">${l}</button>`).join('')}</div><p class="section-note">Pixel previews keep the town’s visual style. Select a photo to see the original in full detail.</p><div class="photo-grid">${gallery.filter(v=>filter==='all'||v.category===filter).map((v,i)=>`<figure><button data-photo="${v.image}" data-caption="${esc(v.title+' — '+v.caption)}" aria-label="Open photo: ${esc(v.title)}">${pixel(v.image,v.title)}</button><figcaption><small>${v.category.toUpperCase()}</small><h3>${esc(v.title)}</h3></figcaption></figure>`).join('')}</div>`;}
+    if(id==='gallery') {const filter=options.filter||'all';html=`<div class="filter-row" aria-label="Gallery categories">${[['all','All moments'],['campus','Campus'],['personal','Personal']].map(([v,l])=>`<button data-gallery-filter="${v}" aria-pressed="${v===filter}">${l}</button>`).join('')}</div><p class="section-note">Select a photo to see it in full detail.</p><div class="photo-grid">${gallery.filter(v=>filter==='all'||v.category===filter).map((v,i)=>`<figure><button data-photo="${v.image}" data-caption="${esc(v.title+': '+v.caption)}" aria-label="Open photo: ${esc(v.title)}">${pixel(v.image,v.title)}</button><figcaption><small>${v.category.toUpperCase()}</small><h3>${esc(v.title)}</h3></figcaption></figure>`).join('')}</div>`;}
     if(id==='hobbies') {const type=options.type||'movie';html=`<div class="filter-row"><button data-interest="movie" aria-pressed="${type==='movie'}">Films & series</button><button data-interest="book" aria-pressed="${type==='book'}">My bookshelf</button></div><div class="favorites-grid">${C.mediaItems.filter(m=>m.type===type).map(m=>`<figure>${pixel(m.image,m.title+' cover','cover')}<figcaption>${esc(m.title)}</figcaption></figure>`).join('')}</div>`;}
     if(id==='goals') html=`<div class="direction-list">${C.goals.map(g=>`<article><small>${g.id}</small><div><h3>${esc(g.title)}</h3><p>${esc(g.description)}</p></div></article>`).join('')}</div>`;
     if(id==='contact') html=`<div class="contact-intro"><h3>Let’s make something useful.</h3><p>I welcome conversations about student projects, analytics, quality analysis, and collaboration.</p><a class="contact-email" href="mailto:emnollen@student.apc.edu.ph">emnollen@student.apc.edu.ph ↗</a></div><div class="contact-links">${C.socialLinks.filter(s=>s.label!=='Email').map(s=>`<a href="${s.label==='LinkedIn'?'https://www.linkedin.com/in/elijahnollen/':esc(s.href)}" target="_blank" rel="noopener">${pixel(s.icon,s.label+' logo','logo')}<span>${s.label} ↗</span></a>`).join('')}</div><div class="guestbook-invite"><h3>Leave a note at the Post Office</h3><p>Read messages from visitors or sign Eli’s guestbook.</p><button class="portfolio-action" data-guestbook>Open guestbook ↗</button></div>`;
@@ -123,7 +123,7 @@
     c.imageSmoothingEnabled=false;
     if(id==='gallery')roomObjects.filter(o=>o.type==='photos').forEach((o,idx)=>{
       rect(o.x-2,o.y-15,o.w+4,o.h+17,'#b67e91',c);rect(o.x+2,o.y-11,o.w-4,o.h+9,'#f8e5d0',c);
-      gallery.filter(photo=>photo.category===(idx?'campus':'personal')).slice(0,3).forEach((photo,i)=>{const im=cached(photo.image);if(!im.complete||!im.naturalWidth)return;rect(o.x+4+i*36,o.y,32,50,'#fff4e4',c);c.drawImage(im,o.x+7+i*36,o.y+3,26,38)});
+      gallery.filter(photo=>photo.category===(idx?'campus':'personal')).slice(0,3).forEach((photo,i)=>{const im=cached(photo.image);if(!im.complete||!im.naturalWidth)return;rect(o.x+4+i*36,o.y,32,50,'#fff4e4',c);c.imageSmoothingEnabled=true;c.drawImage(im,o.x+7+i*36,o.y+3,26,38);c.imageSmoothingEnabled=false});
     });
     if(id==='skills'){
       rect(428,335,264,68,'#fff0dc',c);rect(432,339,256,60,'#ebd8db',c);
@@ -131,7 +131,7 @@
       text('TOOLS I WORK WITH',560,391,9,'#74546a',c);
     }
     if(id==='about'){
-      const im=cached('img/me-nobg.png');if(im.complete&&im.naturalWidth){rect(585,215,30,40,'#c992a9',c);rect(588,218,24,34,'#fff0df',c);c.drawImage(im,589,219,22,32)}
+      const im=cached('img/me-nobg.png');if(im.complete&&im.naturalWidth){rect(585,215,30,40,'#c992a9',c);rect(588,218,24,34,'#fff0df',c);c.imageSmoothingEnabled=true;c.drawImage(im,589,219,22,32);c.imageSmoothingEnabled=false}
     }
   }
   window.Portfolio={showSection,showGuide,inspect,drawRoomDetails,updateGuide};
