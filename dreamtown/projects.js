@@ -37,10 +37,10 @@ window.PROJECTS = [
     id: 'wah', title: 'WAHgyu · Wireless Access for Health', category: 'Healthcare systems', status: 'In progress', initials: 'QA', tone: 'peach',
     role: 'Quality Analyst',
     summary: 'Supporting the quality and clarity of an ongoing healthcare-system project.',
-    context: 'I am the Quality Analyst on our current Wireless Access for Health project, WAHgyu. The work includes healthcare workflows and clearly defined interactions with other WAH systems.',
-    contributions: ['Review use-case descriptions, user stories, and test-case updates for consistency.', 'Help clarify main, alternative, and exception flows so requirements can be understood and checked.', 'Check the alignment of use cases and activity diagrams, including the boundary between WAHgyu and external systems such as WAH4Security.', 'Review medicine-list, prescribing, and clinic-stock workflow requirements as the project evolves.'],
-    takeaway: 'My current focus is making requirements clear, consistent, and testable while the team continues development.',
-    tools: ['Quality analysis', 'Requirements review', 'Test cases', 'UML'],
+    context: 'I serve as a Quality Analyst for WAHgyu, an ongoing Wireless Access for Health project. I help the team check that requirements and expected behavior are clear and consistent as the application develops.',
+    contributions: ['Review requirements, user stories, and test cases for clarity, consistency, and coverage.', 'Compare expected behavior across workflows and project documentation, and flag gaps or conflicting details.', 'Share findings with the team and help refine what needs to be checked as features evolve.'],
+    takeaway: 'My focus is helping the team build a healthcare application whose behavior can be understood, checked, and trusted.',
+    tools: ['Quality analysis', 'Requirements review', 'Test cases', 'Team collaboration'],
     links: []
   }
 ];
