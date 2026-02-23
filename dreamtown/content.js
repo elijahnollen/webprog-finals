@@ -27,8 +27,8 @@ const educationItems = [
     school: "Asia Pacific College",
     yearRange: "2024 - 2028",
     description:
-      "I am currently taking BS Computer Science with focus on cybersecurity and forensics, as an SM Scholar and honor student. I also serve as Director of Operations in JPCS.",
-    badges: ["BS Computer Science", "SM Scholar", "JPCS Director of Operations"]
+      "I am currently taking BS Computer Science with focus on cybersecurity and forensics, as an SM Scholar and honor student. I also serve as Secretariat Officer in JPCS.",
+    badges: ["BS Computer Science", "SM Scholar", "JPCS Secretariat Officer"]
   }
 ];
 
@@ -127,7 +127,7 @@ const awards = [
   {
     id: "A4",
     title: "Leadership",
-    description: "Serving as Director of Operations in JPCS while maintaining strong academics."
+    description: "Serving as Secretariat Officer in JPCS while maintaining strong academics."
   }
 ];
 

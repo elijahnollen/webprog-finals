@@ -24,12 +24,12 @@ window.PROJECTS = [
   },
   {
     id: 'jose', title: 'JOSE', category: 'Collaborative learning application', status: 'Team contribution', initials: 'J', tone: 'lilac',
-    role: 'Learning Content Contributor · Modules 4–6',
-    summary: 'Structured learning modules for a historical investigation adventure about the life and works of Rizal.',
-    context: 'JOSE is a team-built learning application for APC RIZLIFE. My contribution was the module content and its import readiness; the application itself is a collaborative project.',
-    contributions: ['Prepared JMM v1 content for Module 4: Roots, Family, and Early Formation; Module 5: Higher Education, Reform, and Personal Relationships; and Module 6: Return, Exile, Trial, Retraction, and Death.', 'Included lesson objectives, historical content, images and attribution, references, checkpoints, glossaries, and learning games.', 'Revised Modules 4 and 5 to resolve dateHints validation and the Module 4 quiz-source title/label mismatch.', 'Shared feedback and coordinated content revisions with the team.'],
-    takeaway: 'Content quality includes structure and validation as well as the lesson itself.',
-    tools: ['JMM v1', 'Learning content', 'Import validation', 'GitHub collaboration'],
+    role: 'Documentation Team Member',
+    summary: 'Contributed to the documentation team by compiling and organizing lessons for the JOSE web app.',
+    context: 'JOSE is a collaborative learning web app for APC RIZLIFE about the life and works of Rizal. I was part of the documentation team.',
+    contributions: ['Compiled and organized the modules and lessons that needed to be included in the web app.', 'Shared feedback and coordinated content revisions with the team.'],
+    takeaway: 'Clear, organized documentation helps the team prepare learning material for the web app.',
+    tools: ['Documentation', 'Content organization', 'GitHub collaboration'],
     image: 'img/jose-module-cover.png', imageAlt: 'A book-cover artwork asset from the JOSE team repository',
     links: [{label:'View team repository',url:'https://github.com/gelolaus/jose'}]
   },
