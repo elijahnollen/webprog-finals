@@ -72,7 +72,7 @@
   function chrome(id,content) {
     const n=sections.findIndex(s=>s.id===id),s=sections[n];const nextId=id==='goals'?'contact':professionalFlow.includes(id)?professionalFlow[professionalFlow.indexOf(id)+1]:sections[n+1]?.id;activeSection=id;visitedSections.add(id);
     show('ELIJAH NOLLEN / PORTFOLIO',`<div class="portfolio-layout"><nav class="portfolio-nav" aria-label="Portfolio sections"><span class="portfolio-wordmark">ELI NOLLEN<span>COMPUTER SCIENCE · ANALYTICS</span></span>${sections.map((v,i)=>`${v.id==='gallery'?'<span class="personal-nav-label">PERSONAL</span>':''}<button data-section="${v.id}" ${v.id===id?'aria-current="page"':''}><small>${String(i+1).padStart(2,'0')}</small>${v.label}<span>${v.id===id?'→':''}</span></button>`).join('')}<button class="return-town" data-close-portfolio>← Return to town</button></nav><article class="portfolio-article"><div class="section-heading"><p class="section-kicker">${String(n+1).padStart(2,'0')} / ${s.label.toUpperCase()}</p><h2 id="portfolioTitle" tabindex="-1">${esc(s.title)}</h2><p>${esc(s.description)}</p></div>${content}<footer class="portfolio-pagination"><button ${n?'data-section="'+sections[n-1].id+'"':'data-close-portfolio'}>← ${n?sections[n-1].label:'Return to town'}</button>${nextId?`<button data-section="${nextId}">Next: ${sections.find(s=>s.id===nextId).label} →</button>`:'<button data-section="gallery">Explore the personal gallery →</button>'}</footer></article></div>`);
-    body.classList.remove('guide-body');body.classList.add('portfolio-body');body.parentElement.classList.add('portfolio-panel');panel.scrollTop=0;hydrate();body.querySelector('#portfolioTitle')?.focus({preventScroll:true});updateGuide();
+    body.className='portfolio-body';body.parentElement.classList.add('portfolio-panel');panel.scrollTop=0;hydrate();body.querySelector('#portfolioTitle')?.focus({preventScroll:true});updateGuide();
   }
   function showSection(id,options={}) {
     if(!sections.some(s=>s.id===id))return;
@@ -99,7 +99,7 @@
   }
   function showGuide() {
     show('PORTFOLIO TOWN / PORTFOLIO ROUTE',`<div class="town-guide"><p class="section-kicker">A CLEAR PATH THROUGH THE TOWN</p><h2>Meet the person. Explore the work.</h2><p>Follow the suggested route or choose a place. You can read the portfolio directly, or walk through its rooms.</p><div class="guide-list">${sections.map((s,i)=>{const p=places.find(p=>p.id===s.id);return `<article><span>${String(i+1).padStart(2,'0')}</span><div><h3>${s.label}</h3><p>${p.name}</p></div><button data-section="${s.id}">Read ↗</button><button data-room="${s.id}">Visit →</button></article>`}).join('')}</div></div>`);
-    body.classList.remove('portfolio-body');body.classList.add('guide-body');panel.classList.add('portfolio-panel');hydrate();
+    body.className='guide-body';panel.classList.add('portfolio-panel');hydrate();
   }
   function updateGuide() {
     if(room)return;
