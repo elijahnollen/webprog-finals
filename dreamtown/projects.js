@@ -14,10 +14,10 @@ window.PROJECTS = [
   },
   {
     id: 'techzone', title: 'TechZone 2.0', category: 'Database & web application', status: 'DATAMA2 · 2026', initials: 'TZ', tone: 'mint',
-    role: 'Team Lead · Documentation & Integration',
-    summary: 'A computer-parts storefront and admin platform connecting transactional and document databases.',
+    role: 'Team Lead',
+    summary: 'Led the Atomic 7 team in developing a computer-parts storefront and admin platform connecting MySQL and MongoDB.',
     context: 'Our Atomic 7 team extended TechZone’s SQL-based sales and inventory foundation into a customer-facing e-commerce platform. MySQL handled structured transactions; MongoDB supported the catalog and other document-based workflows.',
-    contributions: ['Coordinated the team and prepared the proposal and project documentation.', 'Co-designed the storefront and admin prototype, then refined frontend features.', 'Helped integrate the backend and UI, added payment-related SQL tables, and set up MongoDB collections and synchronization.', 'Participated in system testing before the final presentation.'],
+    contributions: ['Led team coordination and prepared the proposal and project documentation.', 'Co-designed the storefront and admin prototype, then refined frontend features.', 'Helped integrate the backend and UI, added payment-related SQL tables, and set up MongoDB collections and synchronization.', 'Participated in system testing before the final presentation.'],
     takeaway: 'Connecting the storefront to reliable inventory and transaction records mattered as much as the interface.',
     tools: ['MySQL', 'MongoDB', 'PHP', 'React', 'TypeScript'],
     links: [{label: 'View repository',url:'https://github.com/elijahnollen/datama2-techzone'}, {label:'Read project documentation',url:'https://github.com/elijahnollen/datama2-techzone/blob/main/techzone/docs/Project%20Documentation.md'}]
