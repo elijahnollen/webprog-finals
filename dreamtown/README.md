@@ -32,3 +32,7 @@ Fonts: DM Sans, Playfair Display, and Press Start 2P via Google Fonts. Personal 
 
 ## Town residents and open rooms
 The map uses roofless cutaway rooms with readable section signs and visible entrances. Four fictional NPC hosts offer wayfinding via click, E, or the Meet residents menu. Each of the eight rooms has three distinct furniture types, with no shared main-object type across rooms. Seventeen bespoke pixel illustrations in room-art.js complement the original atlas furniture. Room-specific floor designs distinguish the library, studio, cinema, garden, gallery, workshop, and post office. Personal information remains in the canonical portfolio content.
+
+
+## Visual polish
+DetailedProps in scene-polish.js loads the v2 furnishing atlas with explicit crops and retains procedural fallbacks. Scene dressing adds room-specific wall features, stepped sunlight, architectural edging, vines, garden patches, and subtle reduced-motion-aware ambient particles. Desktop camera framing shows the full portfolio route. NPC designs and matching portraits are drawn individually by npc-art.js.
