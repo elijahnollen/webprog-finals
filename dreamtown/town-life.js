@@ -1,0 +1,49 @@
+// Fictional town hosts provide wayfinding; portfolio facts live in portfolio.js.
+(()=>{
+ const labels={about:'ABOUT ELI',education:'BACKGROUND',skills:'SKILLS',hobbies:'INTERESTS',goals:'DIRECTION',gallery:'GALLERY',projects:'PROJECTS',contact:'CONTACT'};
+ const props={about:[11,8,15],education:[9,14,15],skills:[10,9,15],hobbies:[12,9,8],goals:[14,8,15],gallery:[13,13,8],projects:[10,13,15],contact:[15,9,10]};
+ const residents=[
+ {id:'npc-poppy',npc:true,name:'Poppy',role:'Town guide',x:676,y:457,hair:'#88564d',skin:'#eac0a0',dress:'#c35d91',to:'about',line:'Welcome to Dreamtown! The open rooms are little previews of Eli’s portfolio. Click a room to walk to its entrance, then explore the full interior. Start at the Dreamhouse to meet Eli.'},
+ {id:'npc-june',npc:true,name:'June',role:'Studio host',x:815,y:341,hair:'#413d56',skin:'#c28d74',dress:'#638f94',to:'projects',line:'Looking for Eli’s work? The Idea Atelier brings together election analytics, TechZone, JOSE, and her current quality assurance work with Wireless Access for Health. Each project explains her contribution.'},
+ {id:'npc-bea',npc:true,name:'Bea',role:'Gallery keeper',x:469,y:460,hair:'#ad754f',skin:'#f2c8b0',dress:'#a884b8',to:'gallery',line:'The Memory House holds Eli’s photographs, campus moments, and little adventures. Inside, the framed boards lead to the gallery. Select a photograph to see its original detail.'},
+ {id:'npc-lumi',npc:true,name:'Lumi',role:'Postmaster',x:1033,y:351,hair:'#684952',skin:'#d4a080',dress:'#d8839c',to:'contact',line:'The Post Office is your stop for getting in touch with Eli. You can find her contact details and professional profiles there. Every building has a sign showing the portfolio section it contains.'}
+ ];
+ function building(p){const{x,y,w,h,color,roof}=p,c=g;
+  rect(x+6,y+10,w+9,h+12,'#56775d33',c);rect(x-5,y-37,w+10,h+45,'#9e6d80',c);
+  rect(x,y-34,w,h+38,'#f1d5c5',c);
+  // Exposed back wall, wallpaper, baseboard, and parquet flooring.
+  rect(x,y-34,w,47,color,c);for(let xx=x+9;xx<x+w;xx+=16){rect(xx,y-30,1,39,'#fff2e65c',c);text('·',xx+6,y-17,9,'#ffffff99',c)}
+  rect(x,y+10,w,4,'#fff1dc',c);
+  for(let yy=y+17;yy<y+h;yy+=12)for(let xx=x;xx<x+w;xx+=27){rect(xx,yy,26,1,'#c497984d',c);rect(xx+(yy%24?10:0),yy,1,12,'#b88c8d44',c)}
+  rect(x+28,y+39,w-56,43,roof,c);rect(x+32,y+43,w-64,35,'#fff0df55',c);rect(x+40,y+48,w-80,1,'#ffe8d6',c);
+  // Windows, a framed print, shelves, and warm wall lamps.
+  for(const xx of [x+15,x+w-38]){rect(xx,y-27,24,29,'#fff1dc',c);rect(xx+3,y-24,18,23,'#a5ccd1',c);rect(xx+11,y-24,2,23,'#fff1dc',c);rect(xx+3,y-13,18,2,'#fff1dc',c);rect(xx-3,y-27,4,30,roof,c);rect(xx+23,y-27,4,30,roof,c)}
+  rect(x+w/2-10,y-28,20,24,'#ad7b8e',c);rect(x+w/2-7,y-25,14,18,'#fff1db',c);text(p.icon,x+w/2,y-12,12,roof,c);
+  if(spriteReady){const list=props[p.id],positions=[[x+5,y+4,46,50],[x+w-54,y+7,48,49],[x+w/2-25,y+45,50,43]];layouts[p.id].objects.forEach((o,i)=>{const box=positions[i];if(!window.RoomArt.draw(c,o[1],...box))drawArt(c,list[i],...box)})}
+  else{rect(x+10,y+18,32,23,roof,c);rect(x+w-44,y+18,32,23,roof,c)}
+  // Cutaway side walls and a low front wall leave the doorway clearly open.
+  rect(x-5,y-37,5,h+45,'#fff0dd',c);rect(x+w,y-37,5,h+45,'#c28fa2',c);
+  rect(x-5,y+h-6,w/2-15,13,color,c);rect(x+w/2+20,y+h-6,w/2-15,13,color,c);
+  rect(x-5,y+h-9,w/2-15,3,'#fff0dd',c);rect(x+w/2+20,y+h-9,w/2-15,3,'#fff0dd',c);
+  rect(x+w/2-20,y+h+2,40,6,'#fff0db',c);rect(x+w/2-24,y+h+8,48,5,'#d3aaa9',c);
+  text('↓',x+w/2,y+h+28,15,'#9b5076',c);
+  if(decorReady){drawDecor(c,6,x-15,y+h-28,25,40);drawDecor(c,6,x+w-8,y+h-28,25,40)}
+  return true;
+ }
+ function markers(){for(const p of places){const x=p.x+p.w/2,y=p.y-65,label=labels[p.id],width=Math.max(100,label.length*8+27);rect(x-width/2-2,y-15,width+4,29,'#a7768c',ctx);rect(x-width/2,y-17,width,27,'#fff6e5',ctx);text((visited.has(p.id)?'✓ ':'')+label,x,y-1,11,'#834b67',ctx);text(p.sign,x,y+24,7,'#754c60',ctx)}}
+ function character(n,t){const x=n.x,y=n.y,bob=reduced?0:Math.round(Math.sin(t*1.6+residents.indexOf(n))*1);const c=ctx;
+  rect(x-10,y+1,21,4,'#66526533',c);rect(x-7,y-34+bob,14,19,n.hair,c);rect(x-5,y-30+bob,10,12,n.skin,c);rect(x-8,y-35+bob,16,7,n.hair,c);rect(x-4,y-24+bob,2,2,'#493a49',c);rect(x+3,y-24+bob,2,2,'#493a49',c);rect(x-2,y-19+bob,4,1,'#ab667a',c);
+  rect(x-6,y-16+bob,12,13,n.dress,c);rect(x-9,y-7+bob,18,5,n.dress,c);rect(x-8,y-15+bob,3,9,n.skin,c);rect(x+6,y-15+bob,3,9,n.skin,c);rect(x-3,y-16+bob,6,3,'#fff1dc',c);rect(x-6,y-5,4,8,n.skin,c);rect(x+2,y-5,4,8,n.skin,c);rect(x-7,y+2,7,3,'#fff0dd',c);rect(x+2,y+2,7,3,'#fff0dd',c);
+  rect(x-6,y-31+bob,2,11,'#ffffff18',c);rect(x+4,y-32+bob,2,8,'#251f3b22',c);rect(x-5,y-12+bob,2,6,'#ffffff44',c);rect(x-4,y-4+bob,8,1,'#fff0dc77',c);rect(x-1,y-10+bob,2,2,'#fff1dc',c);rect(x+7,y-34+bob,5,4,'#f4bfce',c);rect(x+9,y-37+bob,2,9,'#f4bfce',c);
+  rect(x-13,y-60,26,16,'#9e7083',c);rect(x-14,y-62,26,16,'#fff8eb',c);rect(x-3,y-46,4,4,'#fff8eb',c);text('···',x-1,y-51,12,'#a35d80',c);
+  text(n.name.toUpperCase(),x,y+18,8,'#70425e',c);
+ }
+ function talk(n){activeBuilding=null;body.className='npc-body';panel.classList.remove('portfolio-panel');show(n.role+' · '+n.name,`<div class="npc-intro"><span class="npc-avatar" style="--host-color:${n.dress}" aria-hidden="true">✿</span><div><small>DREAMTOWN RESIDENT</small><h2>${n.name} · ${n.role}</h2></div></div><p>${n.line}</p><div class="npc-actions"><button class="primary" id="npcVisit">Enter ${places.find(p=>p.id===n.to).name} ↗</button><button class="pill" id="npcRead">Read ${labels[n.to].toLowerCase()}</button><button class="pill" id="npcBye">Keep exploring</button></div><small class="npc-note">A fictional host to help you explore Eli’s portfolio.</small>`);document.querySelector('#npcVisit').onclick=()=>visit(n.to);document.querySelector('#npcRead').onclick=()=>showContent(n.to);document.querySelector('#npcBye').onclick=()=>panel.close()}
+ function hosts(){body.className='npc-body';panel.classList.remove('portfolio-panel');show('Meet the residents',`<h2>Your Dreamtown hosts</h2><p>Walk up to a resident and press E, click their character, or choose a host here.</p><div class="resident-list">${residents.map(n=>`<button class="pill" data-host="${n.id}">${n.name} · ${n.role} ↗</button>`).join('')}</div>`);body.querySelectorAll('[data-host]').forEach(b=>b.onclick=()=>talk(residents.find(n=>n.id===b.dataset.host)))}
+ window.TownLife={building,markers,talk,draw:t=>residents.forEach(n=>character(n,t)),hit:(x,y)=>residents.find(n=>Math.abs(n.x-x)<20&&y>n.y-65&&y<n.y+20),near:p=>residents.find(n=>Math.hypot(n.x-p.x,n.y+22-p.y)<43)};
+ const button=document.createElement('button');button.className='pill residents-button';button.textContent='Meet residents';button.onclick=hosts;document.querySelector('.header-right').prepend(button);
+ document.querySelector('#questHint').innerHTML='♡ Welcome to Dreamtown<br><strong>Click an open room to enter. Talk to residents with E.</strong>';
+ document.querySelector('.map-note').textContent='✧ open rooms · friendly hosts';
+ document.querySelector('.game-bottom span:last-child').textContent='Click an open room or resident to explore ↗';
+ seed=47;paintWorld();enrichGround();
+})();
