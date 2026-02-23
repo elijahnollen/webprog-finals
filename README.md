@@ -19,3 +19,5 @@ An interactive portfolio built around an explorable pixel-art town. Visitors can
 - `introduction/`: earlier static site
 
 Run `npm run build` from `frontend/` to prepare the static site in `frontend/dist/`. The guestbook proxy uses a server-side environment variable for the backend address. Credentials and database access keys belong in deployment settings, not in the repository.
+
+Run `npm run format` from `frontend/` to format the active site source and its backend copy.
