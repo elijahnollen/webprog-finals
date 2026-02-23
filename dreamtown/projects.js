@@ -31,7 +31,7 @@ window.PROJECTS = [
     takeaway: 'Content quality includes structure and validation as well as the lesson itself.',
     tools: ['JMM v1', 'Learning content', 'Import validation', 'GitHub collaboration'],
     image: 'img/jose-module-cover.png', imageAlt: 'A book-cover artwork asset from the JOSE team repository',
-    links: [{label:'View team repository',url:'https://github.com/gelolaus/jose'}, {label:'See my module contribution',url:'https://github.com/gelolaus/jose/issues/72'}]
+    links: [{label:'View team repository',url:'https://github.com/gelolaus/jose'}]
   },
   {
     id: 'wah', title: 'WAHgyu · Wireless Access for Health', category: 'Healthcare systems', status: 'In progress', initials: 'QA', tone: 'peach',
