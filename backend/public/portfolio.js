@@ -1,4 +1,3 @@
-/* One canonical home for each part of the portfolio, shared by the guide and game rooms. */
 (() => {
   const sections = [
     {id:'about', label:'About', title:'Hi, I’m Eli.', description:'The person behind the portfolio.'},
@@ -37,7 +36,6 @@
   function paintPixelImage(img) {
     if (!img.complete || !img.naturalWidth || img.dataset.painted) return;
     img.dataset.painted='pending';
-    // Decode a detached source so layout and lazy-loading cannot crop the bitmap.
     const source=new Image();
     source.onload=()=>{
       const longest=40;

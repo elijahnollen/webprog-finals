@@ -1,4 +1,3 @@
-// Individually drawn pixel props give each room a distinct purpose and silhouette.
 window.RoomArt=(()=>{
  const ink='#785568',cream='#fff0dc',wood='#ba8b8e',light='#f6d7cc',rose='#d47ca1',mint='#8bb7ae',lav='#ad95bf';
  const types=new Set(['journal','podium','server','workbench','bookcart','readingchair','timeline','telescope','camera','album','blueprint','kanban','testbench','mailcounter','pigeonholes','parcels','flowers']);

@@ -1,4 +1,3 @@
-// Fictional town hosts provide wayfinding; portfolio facts live in portfolio.js.
 (()=>{
  const labels={about:'ABOUT ELI',education:'BACKGROUND',skills:'SKILLS',hobbies:'INTERESTS',goals:'DIRECTION',gallery:'GALLERY',projects:'PROJECTS',contact:'CONTACT'};
  const props={about:[11,8,15],education:[9,14,15],skills:[10,9,15],hobbies:[12,9,8],goals:[14,8,15],gallery:[13,13,8],projects:[10,13,15],contact:[15,9,10]};
@@ -11,17 +10,14 @@
  function building(p){const{x,y,w,h,color,roof}=p,c=g;
   rect(x+6,y+10,w+9,h+12,'#56775d33',c);rect(x-5,y-37,w+10,h+45,'#9e6d80',c);
   rect(x,y-34,w,h+38,'#f1d5c5',c);
-  // Exposed back wall, wallpaper, baseboard, and parquet flooring.
   rect(x,y-34,w,47,color,c);for(let xx=x+9;xx<x+w;xx+=16){rect(xx,y-30,1,39,'#fff2e65c',c);text('·',xx+6,y-17,9,'#ffffff99',c)}
   rect(x,y+10,w,4,'#fff1dc',c);
   for(let yy=y+17;yy<y+h;yy+=12)for(let xx=x;xx<x+w;xx+=27){rect(xx,yy,26,1,'#c497984d',c);rect(xx+(yy%24?10:0),yy,1,12,'#b88c8d44',c)}
   rect(x+28,y+39,w-56,43,roof,c);rect(x+32,y+43,w-64,35,'#fff0df55',c);rect(x+40,y+48,w-80,1,'#ffe8d6',c);
-  // Windows, a framed print, shelves, and warm wall lamps.
   for(const xx of [x+15,x+w-38]){rect(xx,y-27,24,29,'#fff1dc',c);rect(xx+3,y-24,18,23,'#a5ccd1',c);rect(xx+11,y-24,2,23,'#fff1dc',c);rect(xx+3,y-13,18,2,'#fff1dc',c);rect(xx-3,y-27,4,30,roof,c);rect(xx+23,y-27,4,30,roof,c)}
   rect(x+w/2-10,y-28,20,24,'#ad7b8e',c);rect(x+w/2-7,y-25,14,18,'#fff1db',c);text(p.icon,x+w/2,y-12,12,roof,c);
   if(spriteReady){const list=props[p.id],positions=[[x+5,y+4,46,50],[x+w-54,y+7,48,49],[x+w/2-25,y+45,50,43]];layouts[p.id].objects.forEach((o,i)=>{const box=positions[i];if(!window.RoomArt.draw(c,o[1],...box))drawArt(c,list[i],...box)})}
   else{rect(x+10,y+18,32,23,roof,c);rect(x+w-44,y+18,32,23,roof,c)}
-  // Cutaway side walls and a low front wall leave the doorway clearly open.
   rect(x-5,y-37,5,h+45,'#fff0dd',c);rect(x+w,y-37,5,h+45,'#c28fa2',c);
   rect(x-5,y+h-6,w/2-15,13,color,c);rect(x+w/2+20,y+h-6,w/2-15,13,color,c);
   rect(x-5,y+h-9,w/2-15,3,'#fff0dd',c);rect(x+w/2+20,y+h-9,w/2-15,3,'#fff0dd',c);

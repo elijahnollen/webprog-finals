@@ -1,4 +1,3 @@
-/* Continuous portfolio world with original scenery and shared portfolio exhibits. */
 (()=>{
 'use strict';window.RPG={};
 const W=2400,H=1700,S=.48,RW=864*S,RH=535*S;
@@ -36,7 +35,6 @@ for(const [x,y] of [[120,480],[160,650],[550,180],[850,270],[1370,180],[1550,180
 for(const x of [600,1455,2080])for(const y of [530,1050,1510])lampPost(x,y);
 R(860,965,135,70,'#b18287');R(865,970,125,56,'#f3c2cc');R(875,980,105,29,'#795b65');R(855,955,145,18,'#f2d6be');for(let x=855;x<1000;x+=20)R(x,955,10,20,'#c86b90');R(855,1008,145,8,'#fff0d2');label('CAFÉ',926,947,9);for(let x=1040;x<1440;x+=110){R(x,1010,40,7,'#b88787');R(x+17,1017,6,18,'#967779');R(x-6,1002,52,8,'#f3ddd0');seat(x-5,1040,'Sit at the café');}solids.push(box(855,955,145,78));
 for(let i=0;i<130;i++){const x=100+random()*1950,y=140+random()*1430;if(rooms.some(b=>inside({x,y},b,35))||solids.some(b=>inside({x,y},b,25))||x>600&&x<725||x>1450&&x<1585||[560,880,1080,1530].some(v=>Math.abs(y-v)<90))continue;R(x,y,2,6,'#5f8c6a');R(x-2,y-2,7,4,i%3?'#edb3cb':'#fff0cf');R(x+1,y-1,2,2,'#e7c574');}
-// Café shelves, espresso machine, pastries, menu, stone borders and planter boxes.
 R(870,980,114,2,'#dfb9a2');R(870,997,114,2,'#dfb9a2');
 for(let x=875;x<980;x+=16){R(x,985,8,9,'#e5c3a0');R(x+1,983,6,2,'#fff0d5');R(x+2,988,4,2,'#a26b7b');}
 R(943,979,27,27,'#b5bab2');R(947,983,19,10,'#5f646b');R(948,996,3,7,'#e6dbcc');R(960,996,3,7,'#e6dbcc');R(944,1005,29,3,'#827b7b');

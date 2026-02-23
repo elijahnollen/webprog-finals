@@ -1,4 +1,3 @@
-// Public portfolio summaries. Source material stays in its original repository or post.
 window.PROJECTS = [
   {
     id: 'namfrel', title: 'NAMFREL · BARMM Election Analytics',

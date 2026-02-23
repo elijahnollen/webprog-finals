@@ -1,7 +1,7 @@
 import { cpSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
-const source = resolve(process.cwd(), '..', 'dreamtown');
+const source = resolve(process.cwd(), '..', 'portfolio');
 const output = resolve(process.cwd(), 'dist');
 if (!existsSync(join(source, 'index.html'))) {
   throw new Error('Interactive portfolio source is missing.');

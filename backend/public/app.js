@@ -27,15 +27,12 @@ function tree(x,y,pink=false){if(decorReady){drawDecor(g,pink?0:1,x-29,y-38,76,8
 function bench(x,y){if(decorReady){drawDecor(g,3,x-4,y-14,51,44);return;}rect(x,y,38,5,'#a76e73');rect(x,y+8,38,5,'#b78081');rect(x+4,y+13,4,9,'#8b6f6f');rect(x+30,y+13,4,9,'#8b6f6f')}
 function lamp(x,y){if(decorReady){drawDecor(g,4,x-13,y-23,30,66);return;}rect(x,y,3,32,'#866c79');rect(x-4,y-9,11,12,'#aa8393');rect(x-2,y-7,7,8,'#fff4c7');rect(x-2,y+32,7,3,'#866c79')}
 function building(p){if(window.TownLife?.building(p))return;const{x,y,w,h,color,roof}=p;if(spriteReady){const i=places.indexOf(p);drawArt(g,i,x-18,y-78,w+36,h+90);rect(x+w/2-65,y+h+13,130,15,'#fff3dc');text(p.sign,x+w/2,y+h+23,8,'#89526a');return;}rect(x+8,y+17,w+12,h+4,'#52665630');rect(x-1,y,w+2,h,'#a67a8b');rect(x+2,y+2,w-4,h-4,color);
- // Fine brickwork, foundation courses, and raised corner stones.
  for(let yy=8;yy<h-8;yy+=8){rect(x+3,y+yy,w-6,1,'#ffffff26');for(let xx=(yy%16?9:0);xx<w;xx+=18)rect(x+xx,y+yy,1,8,'#ab728c22')}
  rect(x,y+h-8,w,8,'#c09599');for(let xx=0;xx<w;xx+=12)rect(x+xx,y+h-6,1,5,'#976e7e55');
  for(let yy=5;yy<h-10;yy+=12){rect(x+3,y+yy,8,7,'#fff0dc77');rect(x+w-11,y+yy,8,7,'#fff0dc77')}
- // Individually tiled, stepped pitched roof. Every shingle has a lit edge.
  for(let row=0;row<13;row++){const yy=y-53+row*4,inset=(12-row)*5;const left=x-12+inset,right=x+w+12-inset;rect(left,yy,right-left,4,roof);rect(left,yy,right-left,1,'#ffffff2b');for(let xx=left+(row%2?6:0);xx<right;xx+=12){rect(xx,yy,1,4,'#7b3b6b55');rect(xx+2,yy+2,7,1,'#fff0d31b')}}
  rect(x-14,y-1,w+28,4,'#8d567b');rect(x-12,y+3,w+24,3,'#fce7d2');rect(x+2,y+7,w-4,4,'#85586c33');
  rect(x+w-31,y-51,17,23,'#b7798c');for(let yy=0;yy<22;yy+=6){rect(x+w-31,y-51+yy,17,1,'#e4a3ad');rect(x+w-25+(yy%12?4:0),y-50+yy,1,5,'#d893a4')}rect(x+w-33,y-54,21,5,'#e8b1b8');
- // Dormer with miniature panes and a scalloped valance.
  rect(x+w/2-16,y-35,32,28,'#f9e3d3');rect(x+w/2-11,y-30,22,19,'#97bfc9');rect(x+w/2-1,y-30,2,19,'#fff3e0');rect(x+w/2-11,y-21,22,2,'#fff3e0');for(let i=0;i<4;i++)rect(x+w/2-21+i*5,y-35-i*3,42-i*10,4,'#9d6485');
  for(const dx of [20,w-45]){rect(x+dx-4,y+21,31,36,'#ac748f');rect(x+dx-2,y+18,27,35,'#ffefda');rect(x+dx+1,y+21,21,28,'#88b6c8');rect(x+dx+3,y+22,5,18,'#b9dce1');rect(x+dx+1,y+38,21,11,'#9bc4ce');rect(x+dx+10,y+20,2,30,'#fff7ea');rect(x+dx,y+33,24,2,'#fff7ea');rect(x+dx-8,y+21,5,30,roof);rect(x+dx+27,y+21,5,30,roof);for(let yy=24;yy<49;yy+=5){rect(x+dx-7,y+yy,3,1,'#fff2dc66');rect(x+dx+28,y+yy,3,1,'#fff2dc66')}
  rect(x+dx-5,y+54,33,5,'#ac6f86');rect(x+dx-3,y+54,29,2,'#d092a8');for(let f=0;f<5;f++){const xx=x+dx+f*5;rect(xx,y+48,3,7,'#6e9d7c');rect(xx-1,y+46,5,3,['#f27ca9','#f6bad0','#fff1c8'][f%3]);rect(xx+1,y+46,1,2,'#ffeaa5')}}
@@ -44,24 +41,19 @@ function building(p){if(window.TownLife?.building(p))return;const{x,y,w,h,color,
  if(p.id==='hobbies'){for(let i=0;i<15;i++){rect(x-5+i*11,y+8,3,3,i%2?'#fff0a9':'#fff8dd')}for(let i=0;i<7;i++)rect(x+10+i*20,y+82,14,3,i%2?'#f9dfb6':'#d780a5')}
  if(p.id==='skills'){rect(x+5,y+h+7,14,19,'#a17b86');rect(x+3,y+h+4,18,6,'#dfb1b8');for(let i=0;i<5;i++)flower(x+4+i*3,y+h+3,'#e5a0cd')}
  if(p.id==='goals'){for(let i=0;i<5;i++)flower(x-8+i*39,y+h+19,'#da84b2')}
- // Door sconces and a small doorstep planter.
  for(const dx of [-23,21]){rect(door+dx,y+h-27,3,10,'#8a657a');rect(door+dx-2,y+h-29,7,7,'#ead3a0');rect(door+dx-1,y+h-28,5,4,'#fff2c6')}
 }
 function paintWorld(){rect(0,0,1200,760,'#b8d5a7');for(let i=0;i<6000;i++){const x=Math.floor(rand()*600)*2,y=Math.floor(rand()*380)*2;rect(x,y,rand()>.5?3:2,2,rand()>.5?'#c6dfb5':'#acd09f')}
- // A blush-paved promenade connects every stop.
  rect(563,105,74,655,'#ead4c0');rect(60,360,1080,76,'#ead4c0');rect(570,110,60,650,'#f5e1cc');rect(60,367,1080,62,'#f5e1cc');
  for(const p of places){let cx=p.x+p.w/2;let end=p.y<360?p.y+p.h:436;rect(cx-18,end,36,p.y<360?367-end:p.y-end,'#f0dcc6');}
  for(let x=60;x<1140;x+=22){rect(x,362,14,3,'#dbb9ae');rect(x,431,14,3,'#dbb9ae')}for(let y=125;y<760;y+=24){rect(565,y,3,14,'#dbb9ae');rect(633,y,3,14,'#dbb9ae')}
  for(let i=0;i<20;i++){tree(25+i*60,55,i%3===0);tree(20+i*62,718,i%4===0)}for(let i=0;i<8;i++){tree(35,125+i*72,i%3===0);tree(1165,125+i*72,i%3===0)}
  for(const [x,y]of [[108,140],[330,145],[675,135],[890,145],[115,530],[340,570],[675,585],[920,585]])tree(x,y,true);
- // Pocket gardens and a tiny lily pond.
  rect(65,470,65,90,'#9fc69e');for(let i=0;i<20;i++)flower(75+(i%4)*14,480+Math.floor(i/4)*16,i%2?'#f5a1c0':'#fff2cd');
  rect(865,460,62,16,'#8fbdad');rect(850,476,90,47,'#8fbdad');rect(864,523,62,14,'#8fbdad');rect(859,479,72,39,'#92cbd2');rect(871,466,48,61,'#92cbd2');rect(875,483,25,3,'#c6e7e0');rect(902,509,21,3,'#c6e7e0');rect(912,482,12,6,'#6eaa90');flower(917,482,'#f2afcb');
  places.forEach(building);
- // Central rose fountain.
  rect(554,374,92,12,'#bda6b1');rect(543,386,114,37,'#bda6b1');rect(554,423,92,12,'#bda6b1');rect(553,387,94,35,'#f7d0e0');rect(564,379,72,51,'#f7d0e0');rect(560,390,80,27,'#9bcdd0');rect(572,384,56,39,'#9bcdd0');rect(591,372,18,31,'#f5e6df');rect(582,368,36,10,'#f5e6df');rect(597,353,6,19,'#c0e5df');
  for(const [x,y]of [[330,332],[800,332],[325,457],[810,460]])bench(x,y);for(const x of [100,350,690,900,1120]){lamp(x,338);lamp(x,452)}
- // Picket fences, daisies, and pink boulevard flowers.
  for(const y of [312,654])for(let x=145;x<1105;x+=15){if((x>540&&x<665)||(x>860&&x<950))continue;rect(x,y,4,15,'#fff3e4');rect(x-2,y+4,18,3,'#fff3e4')}
  for(let i=0;i<80;i++){const x=80+rand()*1040,y=rand()>.5?333:460;if(x>530&&x<670)continue;flower(x,y,i%3?'#e996b7':'#fff3d1')}
  if(decorReady){drawDecor(g,2,537,335,125,104);drawDecor(g,5,72,470,65,90);drawDecor(g,7,899,545,48,45)}
@@ -116,15 +108,12 @@ function leaveRoom(){const p=places.find(p=>p.id===room);room=null;roomObjects=[
 function activateNear(){if(!near)return;if(room){if(near.id==='exit')leaveRoom();else inspectObject(near)}else if(near.npc)window.TownLife.talk(near);else visit(near.id)}
 function inspectObject(o){window.Portfolio.inspect(room,o.index)}
 function drawInterior(){const l=layouts[room],c=ctx;rect(0,0,1200,760,'#855672',c);rect(150,135,900,570,'#75475f',c);rect(168,150,864,535,l.floor,c);
- // Inlaid parquet floor and rose-colored walls.
  for(let y=320;y<680;y+=28)for(let x=170;x<1030;x+=80){rect(x+((y/28)%2)*25,y,78,1,'#b88c8e44',c);rect(x,y,1,28,'#b88c8e44',c)}
  rect(168,150,864,180,l.wall,c);rect(168,310,864,20,'#fff2e0',c);rect(170,160,8,515,'#fff0df',c);rect(1020,160,10,515,'#e7b7c8',c);rect(168,675,864,12,'#fff0df',c);
  for(let x=190;x<1020;x+=40){rect(x,165,1,140,'#ffffff30',c);text('✧',x+18,190,12,'#ffffff99',c);text('♡',x+18,265,10,'#ffffff66',c)}
- // Arched windows, curtains, a deep rug and an open exit.
  for(const x of [330,820]){rect(x,195,72,95,'#fff4e4',c);rect(x+7,202,58,80,'#b8dde2',c);rect(x+34,202,5,82,'#fff3e6',c);rect(x+7,238,58,5,'#fff3e6',c);rect(x-10,188,20,102,'#e18eb7',c);rect(x+65,188,20,102,'#e18eb7',c);rect(x-12,184,100,6,'#c27998',c);rect(x+13,210,9,45,'#ffffff55',c)}
  if(!window.RoomArt?.floor(c,room,l)){ rect(390,460,420,150,l.rug,c);rect(399,470,402,130,'#ffffff22',c);for(let x=400;x<805;x+=14){rect(x,456,5,6,'#fff0df',c);rect(x,610,5,6,'#fff0df',c)}rect(460,485,280,100,'#ffffff20',c);text('♡',600,550,45,'#fff3e099',c);
  }rect(565,675,70,20,'#d38aa6',c);rect(568,677,64,6,'#fce4cb',c);text('↓ TOWN',600,718,12,'#fff3e0',c);text(l.title.toUpperCase(),600,126,17,'#fff2e8',c);
- // Corner plants and scattered personal details.
  for(const x of [205,970]){if(decorReady){drawDecor(c,6,x-9,499,58,102);continue;}rect(x,560,34,32,'#cf8f9f',c);rect(x+4,555,26,9,'#f3b8c6',c);rect(x+14,520,5,38,'#739b74',c);rect(x-4,525,20,12,'#8ab693',c);rect(x+17,510,22,13,'#75a78a',c);rect(x+7,501,18,17,'#9cc39c',c)}
  for(const o of roomObjects){let{x,y,w,h,type}=o;if(window.RoomArt?.draw(c,type,x,y-25,w,h+30)){text(o.name,x+w/2,y+h+24,11,'#7b4d67',c);text(near===o?'[ E ]':'✧',x+w/2,y-52,12,'#a65b85',c);continue;}if(spriteReady&&furnitureIndex[type]!==undefined){drawArt(c,furnitureIndex[type],x-13,y-45,w+26,h+55);text(o.name,x+w/2,y+h+24,11,'#7b4d67',c);text(near===o?'[ E ]':'✧',x+w/2,y-52,12,'#a65b85',c);continue;}rect(x+7,y+h-2,w+10,12,'#7d526d2b',c);
  if(type==='books'){rect(x,y,w,h,'#c28b91',c);rect(x+6,y+5,w-12,h-10,'#fff0df',c);for(let row=0;row<3;row++){for(let i=0;i<9;i++)rect(x+10+i*11,y+12+row*35,8,24-(i%3)*3,['#bca3d1','#e5a0b8','#e8c393','#8fb5ac'][i%4],c);rect(x+4,y+39+row*35,w-8,5,'#bd8a91',c)}}
@@ -139,7 +128,7 @@ function drawInterior(){const l=layouts[room],c=ctx;rect(0,0,1200,760,'#855672',
  else{rect(x,y+15,w,h-15,'#f4dfd4',c);for(let i=0;i<4;i++){rect(x+8+i*24,y+25,20,28,'#fff9e9',c);text('♡',x+18+i*24,y+42,12,'#d982a6',c)}}
  text(o.name,x+w/2,y+h+24,11,'#7b4d67',c);const close=near===o;text(close?'[ E ]':'✧',x+w/2,y-17,close?12:15,'#a65b85',c)}
 }
-const preload=['img/dreamtown-decor.png','img/dreamtown-props-v2.png','img/dreamtown-sprites.png','img/me-nobg.png',...C.mediaItems.map(m=>'.'+m.image),...C.galleryItems.map(m=>'.'+m.image)];let loaded=0;
+const preload=['img/town-decor.png','img/town-props-v2.png','img/town-sprites.png','img/me-nobg.png',...C.mediaItems.map(m=>'.'+m.image),...C.galleryItems.map(m=>'.'+m.image)];let loaded=0;
 const assetLoads=preload.map(src=>new Promise(resolve=>{const image=new Image();image.onload=image.onerror=()=>{loaded++;const n=Math.round(loaded/preload.length*100);document.querySelector('#loadingFill').style.width=n+'%';document.querySelector('#loadingLabel').textContent=n+'%';document.querySelector('.loading-track').setAttribute('aria-valuenow',n);resolve()};image.src=src}));
 Promise.all([...assetLoads,document.fonts.ready]).then(()=>{const title=document.querySelector('#startScreen');title.classList.add('is-ready');const finish=()=>{document.querySelector('#startGame').disabled=false;document.querySelector('#readPortfolioStart').disabled=false;document.querySelector('#bootScreen').hidden=true;if(!started)document.querySelector('#startGame').focus({preventScroll:true})};if(reduced)finish();else title.addEventListener('animationend',finish,{once:true})});
 document.querySelector('#startGame').onclick=begin;
@@ -149,17 +138,14 @@ function enrichGround(){
  if(green>r+12&&green>b+20&&random()<.18){const p=random();rect(x,y,1,p>.8?3:1,p>.5?'#9fbf9444':'#e1eac344');if(p>.94){rect(x-1,y+2,1,1,'#729b7944');rect(x+1,y+2,1,1,'#729b7944')}}
  if(r===245&&green===225&&b===204){if(y%12===0)rect(x,y,3,1,'#ddc6b5');if((x+(Math.floor(y/12)%2)*12)%24===0)rect(x,y,1,3,'#dfc8b7');if(random()<.03)rect(x,y,2,1,'#fff1dd')}
  }
- // Stepping stones, scattered petals, and neatly tended flower borders.
  for(const p of places){const cx=p.x+p.w/2;if(p.y<360)for(let y=p.y+p.h+17;y<350;y+=13){rect(cx-12,y,25,6,'#d6bdb0');rect(cx-11,y,23,4,'#f4ddcc');rect(cx-8,y+1,7,1,'#fff0dc')}
  for(let i=0;i<6;i++){const xx=p.x-9+i*30;rect(xx,p.y+p.h+14,3,2,'#edb3cb');rect(xx+5,p.y+p.h+19,2,1,'#f6c8d8')}}
  for(const [x,y]of[[120,427],[1080,348],[870,550],[360,643]]){rect(x,y,25,3,'#7a786e33');rect(x+7,y-9,10,10,'#e4c1bc');rect(x+9,y-14,7,7,'#f2d4cd');rect(x+15,y-13,4,3,'#b3897c');rect(x+4,y-5,7,4,'#cfaaa6');rect(x+10,y,1,4,'#99766c');rect(x+16,y,1,4,'#99766c')}
  window.ScenePolish?.world(g);
 }
 function interiorDetails(){const c=ctx,l=layouts[room];
- // Fine-grain parquet joints, rug stitching, wallpaper rosettes.
  for(let y=350;y<665;y+=28)for(let x=186;x<1010;x+=80){if(x>380&&x<820&&y>450&&y<620)continue;rect(x+8,y+5,18,1,'#ac7e8330',c);rect(x+40,y+19,27,1,'#fff4e644',c);rect(x+3,y+24,50,1,'#a982821a',c)}
  if(room==='about')for(let x=415;x<790;x+=18){rect(x,477,3,3,'#fbe4d488',c);rect(x,593,3,3,'#fbe4d488',c)}if(room==='about')for(let y=490;y<595;y+=18){rect(406,y,3,3,'#fbe4d488',c);rect(791,y,3,3,'#fbe4d488',c)}
- // Framed personal wall art, crown molding and a room clock.
  rect(169,151,861,4,'#fff0dc',c);rect(169,157,861,2,'#a8768a44',c);rect(169,303,861,2,'#a8768a44',c);
  for(const x of [220,950]){rect(x,212,40,52,'#b17b90',c);rect(x+3,215,34,46,'#fcebd6',c);rect(x+7,219,26,32,l.rug,c);text('✿',x+20,241,20,'#ffead7',c);rect(x+12,255,16,1,'#bf9b95',c)}
  rect(586,178,28,28,'#b98a98',c);rect(589,181,22,22,'#fff0df',c);rect(599,185,1,9,'#9c7087',c);rect(599,194,7,1,'#9c7087',c);rect(596,177,8,2,'#d7b485',c);
@@ -170,16 +156,14 @@ function interiorDetails(){const c=ctx,l=layouts[room];
  if(type==='books'){for(let row=0;row<3;row++)for(let i=0;i<9;i++){rect(x+12+i*11,y+15+row*35,3,1,'#fff5df99',c);rect(x+12+i*11,y+29+row*35,3,1,'#fff5df66',c)}rect(x+3,y+4,2,h-7,'#f0ccb9',c)}
  if(type==='letters'){for(let i=0;i<4;i++){rect(x+11+i*24,y+28,12,1,'#e5c9c4',c);rect(x+11+i*24,y+31,9,1,'#e5c9c4',c);rect(x+22+i*24,y+26,3,4,'#dd8ba9',c)}}
  }
- // Tiny trailing vines and an umbrella stand beside the entrance.
  for(let i=0;i<7;i++){rect(180+i*4,333+i*7,2,7,'#719b84',c);rect(177+i*4,338+i*7,8,4,i%2?'#94b299':'#82a98a',c)}rect(930,620,25,33,'#cc93a9',c);rect(934,614,3,27,'#b494ad',c);rect(945,610,3,31,'#ead2b7',c);rect(934,610,10,3,'#b494ad',c);
 }
-// Build the detailed static scenery once; animated characters render above it.
 seed=47;paintWorld();enrichGround();
 
 const furnitureIndex={sofa:8,books:9,computer:10,vanity:11,screen:12,photos:13,trophy:14,desk:15,letters:15};
 function drawArt(target,index,x,y,w,h){const crops=[[0,0,317,350],[322,0,297,350],[623,40,313,310],[944,0,310,350],[0,350,319,325],[320,350,305,320],[638,350,294,320],[945,350,309,320],[0,695,341,250],[350,670,262,275],[636,680,307,267],[970,670,284,284],[10,946,320,288],[338,958,292,279],[638,945,306,291],[948,953,306,284]];const a=crops[index];target.imageSmoothingEnabled=false;target.drawImage(spriteAtlas,...a,Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
 
-spriteAtlas.onload=()=>{spriteReady=true;seed=47;paintWorld();enrichGround()};spriteAtlas.src='img/dreamtown-sprites.png';
+spriteAtlas.onload=()=>{spriteReady=true;seed=47;paintWorld();enrichGround()};spriteAtlas.src='img/town-sprites.png';
 
 function drawDecor(target,index,x,y,w,h){const cols=4,rows=2,sw=decorAtlas.naturalWidth/cols,sh=decorAtlas.naturalHeight/rows;target.imageSmoothingEnabled=false;target.drawImage(decorAtlas,index%4*sw,Math.floor(index/4)*sh,sw,sh,Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
-decorAtlas.onload=()=>{decorReady=true;seed=47;paintWorld();enrichGround()};decorAtlas.src='img/dreamtown-decor.png';
+decorAtlas.onload=()=>{decorReady=true;seed=47;paintWorld();enrichGround()};decorAtlas.src='img/town-decor.png';

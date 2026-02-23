@@ -1,4 +1,3 @@
-// Each resident has an individual pixel silhouette, outfit, and work accessory.
 window.NPCArt=(()=>{
  const descriptions={poppy:'Mint beret, long braids, walking boots, and a map satchel',june:'Short curls, square glasses, teal overalls, and a tablet',bea:'High bun, lilac artist apron, striped sleeves, and a camera',lumi:'Postal cap, silver bob, navy uniform, and a letter bag'};
  function draw(c,id,x,y,t=0,scale=1){const type=id.replace('npc-',''),motion=typeof reduced!=='undefined'&&!reduced;const bob=motion?Math.round(Math.sin(t*({poppy:2,june:1.3,bea:2.5,lumi:1.7}[type]||1))):0;
@@ -6,7 +5,6 @@ window.NPCArt=(()=>{
  const r=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)},ink='#51465b',paper='#fff0d9',shoe='#75566a';
  r(-12,1,25,4,'#66526533');
  if(type==='poppy'){
-  // A flared raincoat, long braids and broad beret distinguish the guide.
   const skin='#eac0a0',hair='#87513f',mint='#8cbaa3';
   r(-6,-7,4,10,skin);r(3,-7,4,10,skin);r(-8,1,8,4,shoe);r(2,1,8,4,shoe);r(-7,0,5,2,'#ad8790');r(3,0,5,2,'#ad8790');
   r(-8,-28,17,17,mint);r(-10,-16,21,10,mint);r(-7,-25,3,13,'#bdd8b9');r(-1,-26,2,18,'#658d7c');r(-2,-25,4,4,paper);r(0,-17,2,2,paper);r(0,-11,2,2,paper);
@@ -17,7 +15,6 @@ window.NPCArt=(()=>{
   for(let i=0;i<10;i++)r(-7+i*2,-25+i*2,2,3,'#b98a67');r(6,-13,10,13,'#bc8b69');r(7,-14,8,4,'#e1bd90');r(10,-7,3,2,paper);r(-16,-15,8,10,paper);r(-13,-15,1,10,'#96bdb1');r(-15,-12,3,2,'#da9bba');
  }
  if(type==='june'){
-  // Tall and straight in overalls, with cropped curls and square glasses.
   const skin='#bd896f',hair='#3e3a50',teal='#608b94';
   r(-8,-17,7,20,teal);r(3,-17,7,20,teal);r(-9,1,9,5,ink);r(2,1,10,5,ink);r(-8,2,7,1,paper);r(4,2,6,1,paper);r(-6,-13,2,12,'#8db1b4');r(5,-13,2,12,'#8db1b4');
   r(-10,-32,21,17,paper);r(-6,-30,4,17,teal);r(4,-30,4,17,teal);r(-7,-22,16,13,teal);r(-3,-19,8,6,'#8fb0b0');r(-5,-25,2,2,'#d7bd85');r(6,-25,2,2,'#d7bd85');
@@ -27,7 +24,6 @@ window.NPCArt=(()=>{
   r(8,-23,11,17,ink);r(10,-21,7,12,'#b7dbd1');r(11,-18,5,1,'#67939d');r(11,-15,4,1,'#d28eaf');r(12,-7,3,1,paper);r(7,-16,4,4,skin);r(-8,-44,2,2,'#f4d39b');
  }
  if(type==='bea'){
-  // Petite artist: high bun, striped blouse, scalloped apron and camera.
   const skin='#f2c8b0',hair='#ad754f',lilac='#aa86bc';
   r(-6,-6,4,9,skin);r(3,-6,4,9,skin);r(-8,1,8,4,lilac);r(2,1,8,4,lilac);r(-7,1,5,1,paper);r(3,1,5,1,paper);
   r(-9,-25,19,16,paper);r(-12,-23,4,13,paper);r(10,-23,4,13,paper);for(let yy=-21;yy<-10;yy+=4){r(-12,yy,4,2,'#c1a6ce');r(10,yy,4,2,'#c1a6ce')}r(-12,-10,4,5,skin);r(10,-10,4,5,skin);
@@ -36,7 +32,6 @@ window.NPCArt=(()=>{
   r(-5,-22,2,8,ink);r(5,-22,2,8,ink);r(-7,-17,16,10,ink);r(-6,-18,5,3,ink);r(-3,-16,8,8,'#9ea4bb');r(-1,-14,4,4,'#526e82');r(0,-14,2,2,'#d0e3db');r(6,-16,2,2,paper);r(-17,-7,6,10,'#d8b68a');r(-16,-12,1,8,ink);r(-13,-10,1,5,roseColor());
  }
  if(type==='lumi'){
-  // Postmaster in a peaked cap, silver bob, tailored jacket and trousers.
   const skin='#d4a080',silver='#d7c8cc',navy='#68718f',accent='#d58eab';
   r(-7,-12,6,15,navy);r(2,-12,6,15,navy);r(-8,1,9,5,ink);r(2,1,9,5,ink);r(-5,-10,1,12,'#909bb2');r(4,-10,1,12,'#909bb2');
   r(-10,-29,21,19,navy);r(-13,-27,4,12,navy);r(11,-27,4,12,navy);r(-13,-15,4,5,skin);r(11,-15,4,5,skin);r(-4,-28,10,4,paper);r(0,-25,3,10,accent);r(-7,-17,5,3,'#8993aa');r(0,-12,2,2,'#eac58d');r(0,-18,2,2,'#eac58d');r(7,-25,3,3,'#eac58d');
@@ -44,7 +39,6 @@ window.NPCArt=(()=>{
   r(-10,-45,21,7,navy);r(-7,-48,15,4,navy);r(-12,-39,25,4,ink);r(-9,-41,20,2,accent);r(-2,-45,5,3,'#eac58d');
   for(let i=0;i<10;i++)r(-8+i*2,-28+i*2,2,3,'#a67b65');r(7,-16,13,16,'#b18c78');r(8,-17,11,5,'#d0ae93');r(8,-12,12,2,'#8d6a63');r(11,-9,4,3,'#eac58d');r(-18,-20,11,8,paper);r(-17,-19,8,1,'#c996a8');r(-15,-17,5,1,'#c996a8');r(-10,-19,2,2,accent);
  }
- // Individual small idle accents; silhouettes stay still for reduced motion.
  if(bob&&type==='poppy')r(-15,-11+bob,4,1,'#d28ead');
  c.restore();
  }

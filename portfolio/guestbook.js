@@ -1,4 +1,3 @@
-/* The public guestbook talks only to the existing server; Supabase keys stay there. */
 (() => {
   'use strict';
   const endpoint = '/api/guestbook';
