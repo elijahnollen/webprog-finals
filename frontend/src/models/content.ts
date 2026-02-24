@@ -226,6 +226,12 @@ export const attributions: AttributionItem[] = [
       label: "GitHub Pages",
       url: "https://pages.github.com/"
     }
+  },
+  {
+    label: "AI",
+    text: "Creative support and ideation with",
+    linkLabel: "Gemini",
+    linkUrl: "https://gemini.google.com/share/7da477943aa0"
   }
 ];
 

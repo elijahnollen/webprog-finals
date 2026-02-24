@@ -2366,8 +2366,8 @@ p {
   position: absolute;
   width: clamp(168px, 24vw, 224px);
   min-height: clamp(152px, 20vw, 180px);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--note-accent) 70%, #fff 30%), var(--note-accent));
+  background-color: var(--note-accent);
+  background: linear-gradient(180deg, #fff0f6, var(--note-accent));
   border: 2px solid rgba(82, 74, 78, 0.72);
   border-radius: 8px 20px 14px 18px / 14px 10px 18px 12px;
   box-shadow: 5px 6px 0 rgba(82, 74, 78, 0.6);
