@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { GuestbookEntry } from "../../models/guestbook";
+import { GuestbookWall } from "./GuestbookWall";
 
 interface GuestbookEntriesModalProps {
   open: boolean;
@@ -49,37 +50,12 @@ export function GuestbookEntriesModal({
         aria-label="Guestbook entries modal"
       >
         <div className="modal-head">
-          <h4>Guestbook Entries</h4>
+          <h4>Guestbook Wall</h4>
           <button type="button" className="doodle-btn modal-close-btn" onClick={onClose}>
             Close
           </button>
         </div>
-
-        {loading ? (
-          <p>Loading entries...</p>
-        ) : entries.length === 0 ? (
-          <p>No entries yet. Be the first to sign.</p>
-        ) : (
-          <ul className="guest-entry-list modal-entry-list">
-            {entries.map((entry) => (
-              <li key={entry.id} className="guest-entry-item">
-                <div className="guest-entry-content">
-                  <p className="guest-entry-name">
-                    <strong>{entry.name}</strong>
-                  </p>
-                  <p className="guest-entry-message">{entry.message}</p>
-                </div>
-                {entry.sticker ? (
-                  <img
-                    src={entry.sticker}
-                    alt={`${entry.name}'s sticker`}
-                    className="guest-entry-sticker"
-                  />
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        )}
+        <GuestbookWall entries={entries} loading={loading} />
       </div>
     </div>
   );
