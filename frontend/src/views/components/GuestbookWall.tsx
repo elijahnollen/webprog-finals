@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent } from "react";
 import { GuestbookEntry } from "../../models/guestbook";
 
@@ -27,6 +27,18 @@ interface DragState {
   offsetY: number;
 }
 
+interface LayoutMetrics {
+  noteSize: NoteSize;
+  margin: number;
+  gapX: number;
+  gapY: number;
+  columns: number;
+  originX: number;
+  canvasHeight: number;
+  maxLeft: number;
+  maxTop: number;
+}
+
 const NOTE_ACCENTS = ["#fdeff4", "#ffdce7", "#ffcddc", "#ffc0d3", "#ff9fbe", "#ff7fa8"];
 
 function clamp(value: number, min: number, max: number): number {
@@ -50,6 +62,74 @@ function getNoteSize(boardWidth: number): NoteSize {
   return { width: 224, height: 180 };
 }
 
+function parseDateValue(value: string): number {
+  const parsed = Date.parse(value);
+  if (Number.isNaN(parsed)) {
+    return 0;
+  }
+  return parsed;
+}
+
+function buildLayoutMetrics(boardWidth: number, boardHeight: number, entryCount: number): LayoutMetrics {
+  const noteSize = getNoteSize(boardWidth);
+  const margin = 12;
+  const gapX = 18;
+  const gapY = 18;
+
+  if (boardWidth === 0 || boardHeight === 0) {
+    return {
+      noteSize,
+      margin,
+      gapX,
+      gapY,
+      columns: 1,
+      originX: margin,
+      canvasHeight: boardHeight,
+      maxLeft: margin,
+      maxTop: margin
+    };
+  }
+
+  const availableWidth = Math.max(noteSize.width, boardWidth - margin * 2);
+  const columns = Math.max(1, Math.floor((availableWidth + gapX) / (noteSize.width + gapX)));
+  const usedWidth = columns * noteSize.width + (columns - 1) * gapX;
+  const originX = margin + Math.max(0, (availableWidth - usedWidth) / 2);
+  const rows = Math.max(1, Math.ceil(Math.max(entryCount, 1) / columns));
+  const contentHeight = margin * 2 + rows * noteSize.height + (rows - 1) * gapY;
+  const canvasHeight = Math.max(boardHeight, contentHeight);
+  const maxLeft = Math.max(margin, boardWidth - noteSize.width - margin);
+  const maxTop = Math.max(margin, canvasHeight - noteSize.height - margin);
+
+  return {
+    noteSize,
+    margin,
+    gapX,
+    gapY,
+    columns,
+    originX,
+    canvasHeight,
+    maxLeft,
+    maxTop
+  };
+}
+
+function buildGridPlacement(index: number, layout: LayoutMetrics): Pick<NotePlacement, "left" | "top"> {
+  const row = Math.floor(index / layout.columns);
+  const column = index % layout.columns;
+  const left = clamp(
+    layout.originX + column * (layout.noteSize.width + layout.gapX),
+    layout.margin,
+    layout.maxLeft
+  );
+  const top = clamp(
+    layout.margin + row * (layout.noteSize.height + layout.gapY),
+    layout.margin,
+    layout.maxTop
+  );
+
+  return { left, top };
+}
+
 function formatDate(value: string): string {
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) {
@@ -58,29 +138,19 @@ function formatDate(value: string): string {
   return parsed.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
-function buildPlacement(
+function buildAutoPlacement(
   entry: GuestbookEntry,
   index: number,
-  boardWidth: number,
-  boardHeight: number,
-  z: number
+  layout: LayoutMetrics
 ): NotePlacement {
-  const noteSize = getNoteSize(boardWidth);
-  const margin = 12;
-  const maxX = Math.max(margin, boardWidth - noteSize.width - margin);
-  const maxY = Math.max(margin, boardHeight - noteSize.height - margin);
+  const { left, top } = buildGridPlacement(index, layout);
   const seed = hashValue(`${entry.id}:${entry.name}:${index}`);
-  const ratioX = ((seed % 997) + 1) / 998;
-  const ratioY = (((seed >> 3) % 991) + 1) / 992;
-  const left = margin + ratioX * Math.max(0, maxX - margin);
-  const top = margin + ratioY * Math.max(0, maxY - margin);
-  const angle = ((seed % 15) - 7) * 0.7;
 
   return {
     left,
     top,
-    angle,
-    z,
+    angle: 0,
+    z: index + 1,
     accent: NOTE_ACCENTS[seed % NOTE_ACCENTS.length]
   };
 }
@@ -91,7 +161,48 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
   const zRef = useRef(12);
   const [boardSize, setBoardSize] = useState({ width: 0, height: 0 });
   const [draggingId, setDraggingId] = useState<string | null>(null);
-  const [placements, setPlacements] = useState<Record<string, NotePlacement>>({});
+  const [manualPlacements, setManualPlacements] = useState<Record<string, NotePlacement>>({});
+
+  const sortedEntries = useMemo(() => {
+    return [...entries].sort((left, right) => {
+      const dateDiff = parseDateValue(right.createdAt) - parseDateValue(left.createdAt);
+      if (dateDiff !== 0) {
+        return dateDiff;
+      }
+
+      const nameDiff = left.name.localeCompare(right.name);
+      if (nameDiff !== 0) {
+        return nameDiff;
+      }
+
+      return left.id.localeCompare(right.id);
+    });
+  }, [entries]);
+
+  const layout = useMemo(
+    () => buildLayoutMetrics(boardSize.width, boardSize.height, sortedEntries.length),
+    [boardSize.width, boardSize.height, sortedEntries.length]
+  );
+
+  const autoPlacements = useMemo(() => {
+    const next: Record<string, NotePlacement> = {};
+    sortedEntries.forEach((entry, index) => {
+      next[entry.id] = buildAutoPlacement(entry, index, layout);
+    });
+    return next;
+  }, [sortedEntries, layout]);
+
+  const placements = useMemo(() => {
+    const next: Record<string, NotePlacement> = { ...autoPlacements };
+    Object.entries(manualPlacements).forEach(([id, placement]) => {
+      if (!next[id]) {
+        return;
+      }
+
+      next[id] = placement;
+    });
+    return next;
+  }, [autoPlacements, manualPlacements]);
 
   useEffect(() => {
     const element = boardRef.current;
@@ -112,35 +223,36 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
   }, []);
 
   useEffect(() => {
-    if (boardSize.width === 0 || boardSize.height === 0) {
-      return;
-    }
-
-    setPlacements((previous) => {
-      const noteSize = getNoteSize(boardSize.width);
-      const margin = 12;
-      const maxLeft = Math.max(margin, boardSize.width - noteSize.width - margin);
-      const maxTop = Math.max(margin, boardSize.height - noteSize.height - margin);
+    setManualPlacements((previous) => {
+      const activeIds = new Set(sortedEntries.map((entry) => entry.id));
       const next: Record<string, NotePlacement> = {};
+      let changed = false;
 
-      entries.forEach((entry, index) => {
-        const existing = previous[entry.id];
-        if (existing) {
-          next[entry.id] = {
-            ...existing,
-            left: clamp(existing.left, margin, maxLeft),
-            top: clamp(existing.top, margin, maxTop)
-          };
+      Object.entries(previous).forEach(([id, placement]) => {
+        if (!activeIds.has(id)) {
+          changed = true;
           return;
         }
 
-        zRef.current += 1;
-        next[entry.id] = buildPlacement(entry, index, boardSize.width, boardSize.height, zRef.current);
+        const left = clamp(placement.left, layout.margin, layout.maxLeft);
+        const top = clamp(placement.top, layout.margin, layout.maxTop);
+        if (left !== placement.left || top !== placement.top) {
+          changed = true;
+        }
+
+        next[id] = {
+          ...placement,
+          left,
+          top
+        };
       });
 
+      if (!changed && Object.keys(previous).length === Object.keys(next).length) {
+        return previous;
+      }
       return next;
     });
-  }, [entries, boardSize.width, boardSize.height]);
+  }, [sortedEntries, layout.margin, layout.maxLeft, layout.maxTop]);
 
   const startDrag = (
     event: PointerEvent<HTMLLIElement>,
@@ -156,18 +268,25 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
     dragRef.current = {
       id,
       pointerId: event.pointerId,
-      offsetX: event.clientX - boardRect.left - note.left,
-      offsetY: event.clientY - boardRect.top - note.top
+      offsetX: event.clientX - boardRect.left + board.scrollLeft - note.left,
+      offsetY: event.clientY - boardRect.top + board.scrollTop - note.top
     };
 
     zRef.current += 1;
-    setPlacements((previous) => ({
-      ...previous,
-      [id]: {
-        ...previous[id],
-        z: zRef.current
+    setManualPlacements((previous) => {
+      const base = previous[id] ?? placements[id];
+      if (!base) {
+        return previous;
       }
-    }));
+
+      return {
+        ...previous,
+        [id]: {
+          ...base,
+          z: zRef.current
+        }
+      };
+    });
 
     setDraggingId(id);
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -181,21 +300,33 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
     }
 
     const boardRect = board.getBoundingClientRect();
-    const noteSize = getNoteSize(boardRect.width);
-    const margin = 12;
-    const maxLeft = Math.max(margin, boardRect.width - noteSize.width - margin);
-    const maxTop = Math.max(margin, boardRect.height - noteSize.height - margin);
-    const left = clamp(event.clientX - boardRect.left - dragState.offsetX, margin, maxLeft);
-    const top = clamp(event.clientY - boardRect.top - dragState.offsetY, margin, maxTop);
+    const margin = layout.margin;
+    const left = clamp(
+      event.clientX - boardRect.left + board.scrollLeft - dragState.offsetX,
+      margin,
+      layout.maxLeft
+    );
+    const top = clamp(
+      event.clientY - boardRect.top + board.scrollTop - dragState.offsetY,
+      margin,
+      layout.maxTop
+    );
 
-    setPlacements((previous) => ({
-      ...previous,
-      [id]: {
-        ...previous[id],
-        left,
-        top
+    setManualPlacements((previous) => {
+      const base = previous[id] ?? placements[id];
+      if (!base) {
+        return previous;
       }
-    }));
+
+      return {
+        ...previous,
+        [id]: {
+          ...base,
+          left,
+          top
+        }
+      };
+    });
   };
 
   const endDrag = (event: PointerEvent<HTMLLIElement>, id: string): void => {
@@ -212,6 +343,10 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
     setDraggingId(null);
   };
 
+  const stopNoteDrag = (event: PointerEvent<HTMLParagraphElement>): void => {
+    event.stopPropagation();
+  };
+
   if (loading) {
     return <p>Loading entries...</p>;
   }
@@ -222,10 +357,10 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
 
   return (
     <div className="guestbook-wall-shell">
-      <p className="guestbook-wall-hint">Drag notes around the board.</p>
+      <p className="guestbook-wall-hint">Notes are sorted by latest entry. Drag to rearrange.</p>
       <div className="guestbook-wall-board" ref={boardRef}>
-        <ul className="guestbook-wall-notes">
-          {entries.map((entry, index) => {
+        <ul className="guestbook-wall-notes" style={{ height: `${layout.canvasHeight}px` }}>
+          {sortedEntries.map((entry, index) => {
             const placement = placements[entry.id];
             const noteStyle: CSSProperties & { ["--note-accent"]?: string } = placement
               ? {
@@ -255,7 +390,15 @@ export function GuestbookWall({ entries, loading }: GuestbookWallProps) {
                   <strong>{entry.name}</strong>
                   <span>{formatDate(entry.createdAt)}</span>
                 </p>
-                <p className="guestbook-note-message">{entry.message}</p>
+                <p
+                  className="guestbook-note-message"
+                  onPointerDown={stopNoteDrag}
+                  onPointerMove={stopNoteDrag}
+                  onPointerUp={stopNoteDrag}
+                  onPointerCancel={stopNoteDrag}
+                >
+                  {entry.message}
+                </p>
                 {entry.sticker ? (
                   <img
                     src={entry.sticker}

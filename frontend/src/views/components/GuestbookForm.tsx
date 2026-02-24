@@ -16,7 +16,8 @@ export function GuestbookForm({
 }: GuestbookFormProps) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [localError, setLocalError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [messageError, setMessageError] = useState("");
   const [submitError, setSubmitError] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -25,18 +26,23 @@ export function GuestbookForm({
     const cleanName = name.trim();
     const cleanMessage = message.trim();
 
-    if (!cleanName || !cleanMessage) {
-      setLocalError("Name and message are required.");
+    const nextNameError = cleanName ? "" : "Please enter your name.";
+    const nextMessageError = cleanMessage ? "" : "Please enter your message.";
+    setNameError(nextNameError);
+    setMessageError(nextMessageError);
+
+    if (nextNameError || nextMessageError) {
       return;
     }
 
-    setLocalError("");
     setSubmitError("");
 
     try {
       await onSubmit({ name: cleanName, message: cleanMessage, sticker: selectedSticker });
       setName("");
       setMessage("");
+      setNameError("");
+      setMessageError("");
     } catch (error) {
       const messageText = error instanceof Error ? error.message : "Failed to submit.";
       setSubmitError(messageText);
@@ -54,14 +60,33 @@ export function GuestbookForm({
         <form onSubmit={handleSubmit}>
           <input
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => {
+              setName(event.target.value);
+              if (nameError) {
+                setNameError("");
+              }
+            }}
             placeholder="Your Name"
+            aria-invalid={Boolean(nameError)}
+            aria-describedby={nameError ? "guestbook-name-error" : undefined}
           />
+          {nameError ? (
+            <p id="guestbook-name-error" className="form-error field-error" role="alert">
+              {nameError}
+            </p>
+          ) : null}
           <div className="message-area">
             <textarea
               value={message}
-              onChange={(event) => setMessage(event.target.value)}
+              onChange={(event) => {
+                setMessage(event.target.value);
+                if (messageError) {
+                  setMessageError("");
+                }
+              }}
               placeholder="Say something"
+              aria-invalid={Boolean(messageError)}
+              aria-describedby={messageError ? "guestbook-message-error" : undefined}
             />
             <div className="sticker-dropzone">
               {selectedSticker ? (
@@ -71,9 +96,17 @@ export function GuestbookForm({
               )}
             </div>
           </div>
+          {messageError ? (
+            <p id="guestbook-message-error" className="form-error field-error" role="alert">
+              {messageError}
+            </p>
+          ) : null}
 
-          {localError ? <p className="form-error">{localError}</p> : null}
-          {submitError ? <p className="form-error">{submitError}</p> : null}
+          {submitError ? (
+            <p className="form-error" role="alert">
+              {submitError}
+            </p>
+          ) : null}
 
           <button type="submit" className="doodle-submit" disabled={submitting}>
             {submitting ? "SUBMITTING..." : "SUBMIT"}
