@@ -1,0 +1,135 @@
+/* Container for the hobbies section */
+.hobbies-section {
+    padding: 130px 0;
+    text-align: center;
+}
+
+/* Flexible layout for aligning multiple hobby items in a row */
+.hobbies-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+/* Vertical container for an individual hobby icon and its label */
+.hobby-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+}
+
+/* Constrained box to align and center the hobby image icons */
+.hobby-icon-box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Sizing and transition settings for hobby images */
+.hobby-icon-box img {
+    height: 150px;
+    width: auto;
+    margin-top: 50px;
+    transition: transform 0.3s ease;
+}
+
+/* tilt and scale effect when hovering over a hobby */
+.hobby-item:hover img {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+/* button */
+.doodle-btn {
+    all: unset;
+    position: relative;
+    padding: 12px 30px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 60px;
+    display: inline-block;
+    color: black !important;
+    transition: 0.3s ease;
+    border: 2px solid black;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+/* secondary border for the button to create a layered effect */
+.doodle-btn::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 2px;
+    right: -2px;
+    bottom: 2px;
+    border: 1.5px solid black;
+    border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+    z-index: -1;
+    transition: 0.3s ease;
+}
+
+/* trigger for the button and its shadow layer on hover */
+.doodle-btn:hover { transform: scale(1.05) rotate(1deg); }
+
+.doodle-btn:hover::after {
+    top: 2px;
+    left: -4px;
+    transform: rotate(-2deg);
+}
+
+/* Click feedback for the button */
+.doodle-btn:active { transform: scale(0.95); }
+
+/* Overrides Bootstrap modal styles */
+.modal-content {
+    border: 4px solid black !important;
+    border-radius: 0 !important;
+}
+
+/* border for the modal header section */
+.modal-header { border-bottom: 3px solid black !important; }
+
+/* border for the modal footer section */
+.modal-footer { border-top: 3px solid black !important; }
+
+/* Container for movie cards within the hobby modal */
+.movie-item {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* Movie poster styling with border and smooth transitions */
+.movie-item img {
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    display: block;
+}
+
+/* Lift effect and hard shadow for movie posters on hover */
+.movie-item:hover img {
+    transform: translateY(-8px); 
+    box-shadow: 8px 8px 0 black !important;
+}
+
+/* Styling for text labels under icons or images */
+.item-label {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: black !important;
+}
+
+h4 {
+  font-family: 'Shantell Sans', cursive;
+  font-size: 1.4rem; 
+  font-weight: 700;   
+  margin-top: 1.5rem; 
+  color: #222;
+}

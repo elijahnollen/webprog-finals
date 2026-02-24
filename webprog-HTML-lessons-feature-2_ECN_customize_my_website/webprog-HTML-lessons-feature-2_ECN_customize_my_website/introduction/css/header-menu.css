@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Shantell Sans';
+    src: url('https://cdn.jsdelivr.net/gh/elijahnollen/web-programming-practice@main/home/fonts/ShantellSans%5BBNCE%2CINFM%2CSPAC%2Cital%2Cwght%5D.woff2') format('woff2-variations');
+    font-weight: 300 800;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: auto;
+    overflow-y: visible; /* Required for sticky to work */
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: white !important;
+    overflow-x: hidden;
+    overflow-y: visible; /* Required for sticky to work */
+    font-family: 'Shantell Sans', cursive !important;
+}
+
+section {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    scroll-margin-top: 10vh;
+    padding: 40px 0;
+}
+
+/* Sticky wrapper */
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+/* Container for header background svg */
+.header-section {
+    top: 0;
+    height: 15vh;
+    min-height: 80px; 
+    width: 100%;
+    background: white url('../svg/header.svg') no-repeat center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main title within the header */
+.header-section h1 {
+    color: black !important;
+    font-size: clamp(1.5rem, 8vw, 3rem); 
+    font-weight: 800;
+    font-variation-settings: "BNCE" 50, "INFM" 47;
+    text-shadow: -5px -5px 0 #fff, 5px -5px 0 #fff, -5px 5px 0 #fff, 5px 5px 0 #fff;
+    text-align: center;
+    padding: 0 15px;
+}
+
+/* Navigation bar container */
+.menu-space {
+    top: 15vh;
+    min-height: 6vh;
+    background-color: white;
+    padding: 8px 0;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    text-align: right; 
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Individual navigation links */
+.menu-space a {
+    display: inline-block;
+    padding: 5px 15px;
+    text-decoration: none !important;
+    color: black !important;
+    font-variation-settings: "wght" 400, "ital" 0.57, "INFM" 59, "BNCE" 21;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+/* Highlighted state for active link */
+.menu-space a.active {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+h3 {
+  font-family: 'Shantell Sans', cursive;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #000 !important;
+}
+
+@media (max-width: 768px) {
+    .header-section {
+        height: 12vh;
+        z-index: 19;
+    }
+
+    .menu-space {
+        top: 12vh;
+        text-align: left; 
+        padding-left: 10px;
+        z-index: 20
+    }
+
+    .header-section h1 {
+        text-shadow: -3px -3px 0 #fff, 3px -3px 0 #fff, -3px 3px 0 #fff, 3px 3px 0 #fff;
+    }
+}

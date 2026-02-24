@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eli | 2D Portfolio World</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-noise" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <div class="brand">
+            <p class="eyebrow">2D Portfolio Mode</p>
+            <h1>Eli's Interactive World</h1>
+        </div>
+        <div class="topbar-actions">
+            <button id="tourBtn" type="button" class="action-btn">Start Tour</button>
+            <a class="action-btn ghost" href="../introduction/index.html">Open Full Site</a>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="map-panel">
+            <div class="panel-header">
+                <h2>Explore by clicking a zone</h2>
+                <p>Inspired by game-like navigation, built as pure 2D HTML/CSS/JS.</p>
+            </div>
+
+            <div class="map-stage" aria-label="Interactive portfolio map">
+                <div class="route route-a" aria-hidden="true"></div>
+                <div class="route route-b" aria-hidden="true"></div>
+                <div class="route route-c" aria-hidden="true"></div>
+                <div class="route route-d" aria-hidden="true"></div>
+                <div class="route route-e" aria-hidden="true"></div>
+
+                <button class="node is-active" data-target="about" style="--x: 14%; --y: 18%;">About</button>
+                <button class="node" data-target="skills" style="--x: 66%; --y: 15%;">Skills</button>
+                <button class="node" data-target="education" style="--x: 78%; --y: 49%;">Education</button>
+                <button class="node" data-target="goals" style="--x: 42%; --y: 73%;">Goals</button>
+                <button class="node" data-target="contact" style="--x: 12%; --y: 57%;">Contact</button>
+            </div>
+
+            <div class="map-footer">
+                <p class="status-text" id="statusText">Current zone: About</p>
+                <p class="status-text" id="visitedText">Visited zones: 1 / 5</p>
+            </div>
+        </section>
+
+        <aside class="info-panel">
+            <article class="zone-card is-active" id="card-about">
+                <p class="card-label">Zone 01</p>
+                <h3>About Me</h3>
+                <p>
+                    I am Elijah Crisehea M. Nollen, a Computer Science student who loves analytics,
+                    pattern-finding, and solving practical problems with code.
+                </p>
+                <p>
+                    I originally wanted Industrial Engineering, but Computer Science became the right fit,
+                    and now I enjoy building useful digital experiences.
+                </p>
+            </article>
+
+            <article class="zone-card" id="card-skills">
+                <p class="card-label">Zone 02</p>
+                <h3>Skills</h3>
+                <ul>
+                    <li>SAP, Power BI, SQL, Python</li>
+                    <li>HTML, CSS, Linux, Packet Tracer</li>
+                    <li>Data interpretation and technical communication</li>
+                </ul>
+            </article>
+
+            <article class="zone-card" id="card-education">
+                <p class="card-label">Zone 03</p>
+                <h3>Education Timeline</h3>
+                <ul>
+                    <li>Bernardo College (2018-2021)</li>
+                    <li>Las Pinas National High School (2021-2022)</li>
+                    <li>Philippine Christian University STEM (2022-2024)</li>
+                    <li>Asia Pacific College BSCS (2024-2028)</li>
+                </ul>
+            </article>
+
+            <article class="zone-card" id="card-goals">
+                <p class="card-label">Zone 04</p>
+                <h3>Goals</h3>
+                <ul>
+                    <li>Level up technical and analytical depth</li>
+                    <li>Stay balanced while growing academically</li>
+                    <li>Create meaningful impact through technology</li>
+                    <li>Build a purpose-driven career</li>
+                </ul>
+            </article>
+
+            <article class="zone-card" id="card-contact">
+                <p class="card-label">Zone 05</p>
+                <h3>Contact</h3>
+                <p>GitHub: <a href="https://github.com/elijahnollen" target="_blank" rel="noreferrer">elijahnollen</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/elijah-nollen-527563321/" target="_blank" rel="noreferrer">Elijah Nollen</a></p>
+                <p>Email: <a href="mailto:emnollen@student.apc.edu.ph">emnollen@student.apc.edu.ph</a></p>
+            </article>
+        </aside>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
