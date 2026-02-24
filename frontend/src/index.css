@@ -756,7 +756,6 @@ p {
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(82, 74, 78, 0.5) transparent;
-  scrollbar-gutter: stable both-edges;
 }
 
 .timeline-wrapper::before {
@@ -2431,7 +2430,6 @@ p {
   border: 3px solid rgba(82, 74, 78, 0.82);
   border-radius: 20px;
   overflow: auto;
-  scrollbar-gutter: stable;
   background:
     radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.44), transparent 22%),
     radial-gradient(circle at 80% 26%, rgba(255, 192, 211, 0.22), transparent 28%),
