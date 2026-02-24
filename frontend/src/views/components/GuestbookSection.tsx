@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ENDPOINTS } from "../../config/env";
 import { useGuestbookController } from "../../controllers/useGuestbookController";
 import { GuestbookEntriesModal } from "./GuestbookEntriesModal";
 import { GuestbookForm } from "./GuestbookForm";
@@ -15,10 +14,6 @@ export function GuestbookSection() {
       <header className="guestbook-header">
         <h3 className="skills-title">Leave a little trace of yourself!</h3>
       </header>
-
-      <p className="api-note">
-        GET/POST endpoint: <code>{ENDPOINTS.guestbook}</code>
-      </p>
 
       {error && (
         <div className="error-banner">
