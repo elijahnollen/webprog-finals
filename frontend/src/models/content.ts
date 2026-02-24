@@ -2,6 +2,7 @@ export interface EducationItem {
   school: string;
   yearRange: string;
   description: string;
+  badges?: string[];
 }
 
 export interface SkillItem {
@@ -23,6 +24,13 @@ export interface HobbyItem {
 }
 
 export interface GoalItem {
+  id: string;
+  title: string;
+  description: string;
+  dark?: boolean;
+}
+
+export interface AwardItem {
   id: string;
   title: string;
   description: string;
@@ -54,25 +62,29 @@ export const educationItems: EducationItem[] = [
     school: "Bernardo College",
     yearRange: "2018 - 2021",
     description:
-      "I spent most of my junior high school years here. From 7th to 9th grade, I was a consistent honor student and developed my writing skills through the school publication."
+      "I spent most of my junior high school years here. From 7th to 9th grade, I was a consistent honor student and developed my writing skills through the school publication.",
+    badges: ["Honor Student", "Campus Publication"]
   },
   {
     school: "Las Pinas National High School",
     yearRange: "2021 - 2022",
     description:
-      "I moved here for my final junior high year, completed Grade 10, and was recognized as an honor student."
+      "I moved here for my final junior high year, completed Grade 10, and was recognized as an honor student.",
+    badges: ["Grade 10 Completion", "Honor Student"]
   },
   {
     school: "Philippine Christian University",
     yearRange: "2022 - 2024",
     description:
-      "For senior high I took STEM, earned highest honors, and joined Layag Films Production as one of the talents."
+      "For senior high I took STEM, earned highest honors, and joined Layag Films Production as one of the talents.",
+    badges: ["STEM Track", "Highest Honors", "Layag Films"]
   },
   {
     school: "Asia Pacific College",
     yearRange: "2024 - 2028",
     description:
-      "I am currently taking BS Computer Science with focus on cybersecurity and forensics, as an SM Scholar and honor student. I also serve as Director of Operations in JPCS."
+      "I am currently taking BS Computer Science with focus on cybersecurity and forensics, as an SM Scholar and honor student. I also serve as Director of Operations in JPCS.",
+    badges: ["BS Computer Science", "SM Scholar", "JPCS Director of Operations"]
   }
 ];
 
@@ -148,6 +160,30 @@ export const goals: GoalItem[] = [
     id: "04",
     title: "Purpose",
     description: "Live a purpose-driven life focused on service, growth, and contribution."
+  }
+];
+
+export const awards: AwardItem[] = [
+  {
+    id: "A1",
+    title: "SM Scholar",
+    description: "Selected as an SM Scholar for my college studies."
+  },
+  {
+    id: "A2",
+    title: "Highest Honors",
+    description: "Graduated senior high school with highest honors."
+  },
+  {
+    id: "A3",
+    title: "Honor Student",
+    description: "Consistent honor student from junior high through college.",
+    dark: true
+  },
+  {
+    id: "A4",
+    title: "Leadership",
+    description: "Serving as Director of Operations in JPCS while maintaining strong academics."
   }
 ];
 

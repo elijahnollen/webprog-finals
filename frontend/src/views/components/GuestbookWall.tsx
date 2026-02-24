@@ -27,7 +27,7 @@ interface DragState {
   offsetY: number;
 }
 
-const NOTE_ACCENTS = ["#ffe082", "#b9f6ca", "#ffccbc", "#b3e5fc", "#f8bbd0", "#d1c4e9"];
+const NOTE_ACCENTS = ["#fdeff4", "#ffdce7", "#ffcddc", "#ffc0d3", "#ff9fbe", "#ff7fa8"];
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);

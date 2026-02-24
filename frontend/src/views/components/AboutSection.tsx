@@ -1,5 +1,5 @@
 import { PointerEvent, useEffect, useRef } from "react";
-import { aboutText, socialLinks } from "../../models/content";
+import { socialLinks } from "../../models/content";
 
 const SVG_VIEWBOX_WIDTH = 748;
 const SVG_VIEWBOX_HEIGHT = 350;
@@ -10,10 +10,13 @@ function clamp(value: number, min: number, max: number): number {
 
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const nameStageRef = useRef<HTMLDivElement | null>(null);
   const circleRef = useRef<SVGCircleElement | null>(null);
   const turbulenceRef = useRef<SVGFETurbulenceElement | null>(null);
   const displacementRef = useRef<SVGFEDisplacementMapElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const codePulseTimeoutRef = useRef<number | null>(null);
+  const hasAutoCodePlayedRef = useRef(false);
   const energyRef = useRef(0);
 
   const updateTouchPoint = (clientX: number, clientY: number) => {
@@ -42,6 +45,27 @@ export function AboutSection() {
   const onPointerDown = (event: PointerEvent<HTMLElement>) => {
     updateTouchPoint(event.clientX, event.clientY);
     energyRef.current = 1;
+  };
+
+  const triggerCodePulse = () => {
+    const nameStage = nameStageRef.current;
+    if (!nameStage) {
+      return;
+    }
+
+    nameStage.classList.remove("is-code-pulse");
+    // Force reflow so repeated taps reliably restart the animation.
+    void nameStage.offsetHeight;
+    nameStage.classList.add("is-code-pulse");
+
+    if (codePulseTimeoutRef.current !== null) {
+      window.clearTimeout(codePulseTimeoutRef.current);
+    }
+
+    codePulseTimeoutRef.current = window.setTimeout(() => {
+      nameStage.classList.remove("is-code-pulse");
+      codePulseTimeoutRef.current = null;
+    }, 1300);
   };
 
   useEffect(() => {
@@ -80,6 +104,48 @@ export function AboutSection() {
     };
   }, []);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      if (!hasAutoCodePlayedRef.current) {
+        hasAutoCodePlayedRef.current = true;
+        triggerCodePulse();
+      }
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || hasAutoCodePlayedRef.current) {
+            return;
+          }
+
+          hasAutoCodePlayedRef.current = true;
+          triggerCodePulse();
+          currentObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.45 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (codePulseTimeoutRef.current !== null) {
+        window.clearTimeout(codePulseTimeoutRef.current);
+      }
+    },
+    []
+  );
+
   return (
     <section
       ref={sectionRef}
@@ -89,7 +155,7 @@ export function AboutSection() {
       onPointerDown={onPointerDown}
       style={{
         backgroundImage:
-          "linear-gradient(rgba(242,224,214,0.34), rgba(242,224,214,0.34)), url('/svg/background.svg')"
+          "linear-gradient(rgba(253,239,244,0.42), rgba(253,239,244,0.42)), url('/svg/background.svg')"
       }}
     >
       <svg
@@ -152,7 +218,28 @@ export function AboutSection() {
       <img src="/img/me-nobg.png" alt="Eli" className="left-character head-overlap" />
 
       <div className="content-area">
-        <blockquote className="custom-quote">{aboutText}</blockquote>
+        <div
+          ref={nameStageRef}
+          className="name-stage"
+          aria-label="Elijah Crisehea Nollen"
+          onPointerDown={triggerCodePulse}
+        >
+          <p className="name-kicker">Portfolio</p>
+          <h2 className="name-wordmark">
+            <span data-code="const firstName = 'Elijah';">Elijah</span>
+            <span data-code="const middleName = 'Crisehea';">Crisehea</span>
+            <span data-code="const lastName = 'Nollen';">Nollen</span>
+          </h2>
+          <p className="name-subline">
+            A student passionate about analytics and transforming data into actionable insights, with
+            strong interest in exploring patterns and solving complex problems.
+          </p>
+          <div className="name-code-chips" aria-hidden="true">
+            <span>{`<header className="hero">`}</span>
+            <span>{`const role = "Data + Design";`}</span>
+            <span>{`export default ElijahCriseheaNollen;`}</span>
+          </div>
+        </div>
 
         <div className="social-links">
           {socialLinks.map((social) => (
@@ -173,3 +260,4 @@ export function AboutSection() {
     </section>
   );
 }
+
