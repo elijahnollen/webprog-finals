@@ -666,6 +666,7 @@ p {
 
 /* Education */
 .education-section {
+  padding-inline: clamp(10px, 2.4vw, 28px);
   background:
     radial-gradient(circle at 12% 16%, rgba(255, 92, 141, 0.2), transparent 34%),
     radial-gradient(circle at 88% 82%, rgba(82, 74, 78, 0.08), transparent 40%),
@@ -744,13 +745,18 @@ p {
   --timeline-arrow-size: 14px;
   --timeline-arrow-right: clamp(10px, 1.8vw, 20px);
   position: relative;
-  height: 80vh;
-  min-height: 620px;
+  width: 100%;
+  height: clamp(520px, 78vh, 760px);
+  min-height: 520px;
   display: flex;
   align-items: center;
+  padding-block: 20px 40px;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(82, 74, 78, 0.5) transparent;
+  scrollbar-gutter: stable both-edges;
 }
 
 .timeline-wrapper::before {
@@ -787,7 +793,16 @@ p {
 }
 
 .timeline-wrapper::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(82, 74, 78, 0.42);
+  border-radius: 999px;
 }
 
 .timeline-line {
@@ -799,20 +814,21 @@ p {
   background: transparent;
   display: flex;
   align-items: center;
-  padding: 0 340px;
+  padding: 0 clamp(84px, 18vw, 340px);
   z-index: 2;
 }
 
 .timeline-mobile-controls {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 12px;
   margin-top: 14px;
+  flex-wrap: wrap;
 }
 
 .timeline-mobile-btn {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   border: 2px solid var(--home-ink);
   background: rgba(253, 239, 244, 0.94);
@@ -902,7 +918,7 @@ p {
   position: absolute;
   top: calc(52% + 12px);
   left: 50%;
-  width: min(250px, calc(100vw - 40px));
+  width: min(250px, calc(100vw - 64px));
   background: rgba(255, 192, 211, 0.22);
   padding: 20px;
   border-radius: 12px;
@@ -913,6 +929,8 @@ p {
   pointer-events: none;
   text-align: center;
   z-index: 4;
+  max-height: calc(100% - 96px);
+  overflow-y: auto;
 }
 
 .item.active .content {
@@ -2878,22 +2896,23 @@ p {
   }
 
   .timeline-line {
-    padding: 0 120px;
+    padding: 0 clamp(72px, 14vw, 140px);
   }
 
   .timeline-wrapper {
     --timeline-axis-y: 54%;
     --timeline-arrow-size: 13px;
-    min-height: 560px;
+    height: clamp(500px, 74vh, 620px);
+    min-height: 500px;
   }
 
   .item {
-    width: 220px;
-    min-height: 400px;
+    width: 214px;
+    min-height: 384px;
   }
 
   .content {
-    width: 190px;
+    width: min(194px, calc(100vw - 64px));
     padding: 14px;
     top: calc(50% + 10px);
   }
@@ -2992,6 +3011,10 @@ p {
 }
 
 @media (max-width: 768px) {
+  .section-block {
+    padding: 34px 0;
+  }
+
   .header-section {
     height: 12vh;
   }
@@ -3060,12 +3083,41 @@ p {
     width: min(200px, 94%);
   }
 
-  .timeline-wrapper::after {
-    display: none;
+  .timeline-line {
+    padding: 0 clamp(58px, 12vw, 110px);
   }
 
-  .timeline-mobile-controls {
-    display: flex;
+  .timeline-wrapper {
+    --timeline-axis-y: 52%;
+    height: clamp(440px, 72vh, 560px);
+    min-height: 440px;
+    padding-block: 16px 34px;
+  }
+
+  .item {
+    width: 194px;
+    min-height: 348px;
+  }
+
+  .content {
+    width: min(182px, calc(100vw - 56px));
+    padding: 12px;
+    top: calc(50% + 8px);
+    max-height: calc(100% - 88px);
+  }
+
+  .date {
+    top: 20px;
+    font-size: 0.86rem;
+  }
+
+  .item-badges {
+    top: 42px;
+    width: min(186px, 94%);
+  }
+
+  .timeline-wrapper::after {
+    display: none;
   }
 
   .hobbies-grid {
@@ -3198,12 +3250,49 @@ p {
 
 @media (max-width: 520px) {
   .timeline-line {
-    padding: 0 72px;
+    padding: 0 56px;
   }
 
   .timeline-wrapper {
+    --timeline-axis-y: 50%;
     --timeline-arrow-size: 11px;
     --timeline-arrow-right: 8px;
+    height: clamp(390px, 70vh, 500px);
+    min-height: 390px;
+    padding-block: 12px 26px;
+  }
+
+  .item {
+    width: 176px;
+    min-height: 318px;
+  }
+
+  .content {
+    width: min(168px, calc(100vw - 46px));
+    top: calc(49% + 8px);
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .content h2 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .content p {
+    font-size: 0.82rem;
+    line-height: 1.32;
+  }
+
+  .date {
+    top: 16px;
+    font-size: 0.76rem;
+  }
+
+  .item-badges {
+    top: 34px;
+    gap: 4px;
+    width: min(168px, 94%);
   }
 
   .skills-section {
@@ -3380,12 +3469,3 @@ p {
     opacity: 0;
   }
 }
-
-
-  .timeline-line {
-    padding: 0 90px;
-  }
-
-  .timeline-wrapper {
-    min-height: 520px;
-  }
