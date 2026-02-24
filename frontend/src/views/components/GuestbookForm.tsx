@@ -19,9 +19,11 @@ export function GuestbookForm({
   const [nameError, setNameError] = useState("");
   const [messageError, setMessageError] = useState("");
   const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitSuccess("");
 
     const cleanName = name.trim();
     const cleanMessage = message.trim();
@@ -43,6 +45,7 @@ export function GuestbookForm({
       setMessage("");
       setNameError("");
       setMessageError("");
+      setSubmitSuccess("Submission successful! Your guestbook entry was added.");
     } catch (error) {
       const messageText = error instanceof Error ? error.message : "Failed to submit.";
       setSubmitError(messageText);
@@ -65,6 +68,9 @@ export function GuestbookForm({
               if (nameError) {
                 setNameError("");
               }
+              if (submitSuccess) {
+                setSubmitSuccess("");
+              }
             }}
             placeholder="Your Name"
             aria-invalid={Boolean(nameError)}
@@ -82,6 +88,9 @@ export function GuestbookForm({
                 setMessage(event.target.value);
                 if (messageError) {
                   setMessageError("");
+                }
+                if (submitSuccess) {
+                  setSubmitSuccess("");
                 }
               }}
               placeholder="Say something"
@@ -105,6 +114,11 @@ export function GuestbookForm({
           {submitError ? (
             <p className="form-error" role="alert">
               {submitError}
+            </p>
+          ) : null}
+          {submitSuccess ? (
+            <p className="form-success" role="status" aria-live="polite">
+              {submitSuccess}
             </p>
           ) : null}
 
