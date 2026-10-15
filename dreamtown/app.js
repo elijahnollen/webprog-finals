@@ -106,7 +106,7 @@ function frame(now){const dt=Math.min((now-last)/1000,.04);last=now;time=now/100
  canvas.style.width=1200*scale+'px';canvas.style.height=760*scale+'px';canvas.style.transform='none';
  canvas.style.left=Math.max(wrap.clientWidth-1200*scale,Math.min(0,wrap.clientWidth/2-player.x*scale))+'px';canvas.style.top=Math.max(wrap.clientHeight-760*scale,Math.min(0,wrap.clientHeight/2-player.y*scale))+'px';
  const mm=document.querySelector('#minimap'),mc=mm.getContext('2d');mc.imageSmoothingEnabled=false;mc.drawImage(bg,0,0,200,127);mc.fillStyle='#dd3c81';mc.fillRect((room?600:player.x)/6-3,(room?400:player.y)/6-3,6,6);mm.style.display=room?'none':'';
- requestAnimationFrame(frame)}requestAnimationFrame(frame);
+ if(!started){const t=document.querySelector('#titleScene'),tc=t.getContext('2d');tc.imageSmoothingEnabled=false;tc.drawImage(bg,0,0);for(let i=0;i<10;i++){const px=100+(i*137)%1030,py=130+(i*89)%520+(reduced?0:Math.sin(time*.6+i)*7);rect(px,py,2,2,'#ffe9eb88',tc)}}requestAnimationFrame(frame)}requestAnimationFrame(frame);
 let started=false,room=null,roomObjects=[];
 const roomReadButton=document.createElement('button');roomReadButton.className='room-exit room-read';roomReadButton.textContent='Read this room’s story ↗';roomReadButton.hidden=true;document.body.append(roomReadButton);roomReadButton.onclick=()=>showContent(room);
 const exitButton=document.createElement('button');exitButton.className='room-exit';exitButton.textContent='↙ Back to town';exitButton.hidden=true;document.body.append(exitButton);exitButton.onclick=leaveRoom;
@@ -120,7 +120,7 @@ const layouts={
  projects:{title:'The Idea Atelier',wall:'#e8b7d0',floor:'#e4cfd1',rug:'#c88cae',objects:[['Things I’ve made','computer',280,280],['The inspiration board','chart',790,260],['What’s next','desk',530,420]]},
  contact:{title:'The Post Office',wall:'#f2b9c8',floor:'#eed7c4',rug:'#e294b2',objects:[['Send a little hello','desk',500,270],['Find me online','computer',265,390],['Letters & kindness','letters',800,350]]}
 };
-function begin(){started=true;document.querySelector('#startScreen').hidden=true;canvas.focus({preventScroll:true})}
+function begin(){started=true;document.body.classList.remove('intro');document.querySelector('#bootScreen').hidden=true;document.querySelector('#startScreen').hidden=true;canvas.focus({preventScroll:true})}
 function visit(id){if(!started)begin();keys.clear();path=[];activeBuilding=null;room=id;const l=layouts[id];roomObjects=l.objects.map(([name,type,x,y],i)=>({id:id+'-'+i,name,type,x,y,w:type==='screen'?210:type==='sofa'?160:115,h:type==='books'?120:type==='screen'?110:75,index:i}));player.x=600;player.y=610;exitButton.hidden=false;roomReadButton.hidden=false;document.querySelector('#questHint').innerHTML='✧ '+esc(l.title)+'<br><strong>Walk to an object. Press E to discover its story.</strong>';visited.add(id);document.querySelector('#progress').textContent=`${visited.size} / 8 PLACES DISCOVERED`;if(panel.open)panel.close();canvas.focus({preventScroll:true})}
 function leaveRoom(){const p=places.find(p=>p.id===room);room=null;roomObjects=[];path=[];keys.clear();activeBuilding=null;player.x=p?p.x+p.w/2:600;player.y=p?p.y+p.h+35:470;exitButton.hidden=true;roomReadButton.hidden=true;document.querySelector('#questHint').innerHTML='♡ Follow your curiosity<br><strong>Click a building or walk to its door and press E.</strong>';canvas.focus({preventScroll:true})}
 function activateNear(){if(!near)return;if(room){if(near.id==='exit')leaveRoom();else inspectObject(near)}else visit(near.id)}
@@ -159,8 +159,9 @@ function drawInterior(){const l=layouts[room],c=ctx;rect(0,0,1200,760,'#855672',
  text(o.name,x+w/2,y+h+24,11,'#7b4d67',c);const close=near===o;text(close?'[ E ]':'✧',x+w/2,y-17,close?12:15,'#a65b85',c)}
 }
 const preload=['img/dreamtown-decor.png','img/dreamtown-sprites.png','img/me-nobg.png',...C.mediaItems.map(m=>'.'+m.image),...C.galleryItems.map(m=>'.'+m.image)];let loaded=0;
-Promise.all(preload.map(src=>new Promise(resolve=>{const image=new Image();image.onload=image.onerror=()=>{loaded++;const n=Math.round(loaded/preload.length*100);document.querySelector('#loadingFill').style.width=n+'%';document.querySelector('#loadingLabel').textContent='Gathering little details… '+n+'%';resolve()};image.src=src}))).then(()=>{document.querySelector('#loadingLabel').textContent='Your little world is ready. ♡';const b=document.querySelector('#startGame');b.disabled=false;b.textContent='Enter Dreamtown →'});
-document.querySelector('#startGame').onclick=begin;document.querySelector('#skipGame').onclick=()=>{begin();directory()};
+const assetLoads=preload.map(src=>new Promise(resolve=>{const image=new Image();image.onload=image.onerror=()=>{loaded++;const n=Math.round(loaded/preload.length*100);document.querySelector('#loadingFill').style.width=n+'%';document.querySelector('#loadingLabel').textContent=n+'%';document.querySelector('.loading-track').setAttribute('aria-valuenow',n);resolve()};image.src=src}));
+Promise.all([...assetLoads,document.fonts.ready]).then(()=>{const title=document.querySelector('#startScreen');document.querySelector('#startGame').disabled=false;title.classList.add('is-ready');const finish=()=>{document.querySelector('#bootScreen').hidden=true;if(!started)document.querySelector('#startGame').focus({preventScroll:true})};if(reduced)finish();else title.addEventListener('animationend',finish,{once:true})});
+document.querySelector('#startGame').onclick=begin;
 function enrichGround(){
  const data=g.getImageData(0,0,1200,760).data;let n=97;const random=()=>{n=(n*16807)%2147483647;return n/2147483647};
  for(let y=0;y<760;y+=3)for(let x=0;x<1200;x+=3){const i=(y*1200+x)*4,r=data[i],green=data[i+1],b=data[i+2];
