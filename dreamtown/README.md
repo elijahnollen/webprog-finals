@@ -28,3 +28,7 @@ Photo previews and skill logos are pixel-rendered at runtime. Original photograp
 The original frontend and backend remain separate. This version does not connect to the original guestbook database.
 
 Fonts: DM Sans, Playfair Display, and Press Start 2P via Google Fonts. Personal photographs and media covers come from the original portfolio; the NAMFREL team photo comes from the supplied LinkedIn post; the JOSE artwork comes from the team repository. Original generated game-art briefs are recorded in `ART.md`.
+
+
+## Town residents and open rooms
+The map uses roofless cutaway rooms with readable section signs and visible entrances. Four fictional NPC hosts offer wayfinding via click, E, or the Meet residents menu. Each of the eight rooms has three distinct furniture types, with no shared main-object type across rooms. Seventeen bespoke pixel illustrations in room-art.js complement the original atlas furniture. Room-specific floor designs distinguish the library, studio, cinema, garden, gallery, workshop, and post office. Personal information remains in the canonical portfolio content.
