@@ -16,3 +16,7 @@
 canvas.npc-avatar{position:static;inset:auto;transform:none;width:64px;height:72px;object-fit:contain;image-rendering:pixelated;background:#f9e9ef;border:1px solid #e6c5d3;cursor:default;touch-action:auto}
 
 .resident-card{display:flex;align-items:center;gap:15px;text-align:left!important;white-space:normal}.resident-card strong{display:block;font-size:13px}.resident-card small{display:block;line-height:1.6;color:#94758b;margin-top:6px}.resident-portrait{position:static;inset:auto;transform:none;width:64px;height:72px;flex-shrink:0;image-rendering:pixelated;cursor:inherit;touch-action:auto}.resident-list{gap:12px}
+
+.game-mode header .brand,.game-mode header .pill{border-radius:2px;border-color:#ab7891;box-shadow:3px 3px #87566d33;background:#fff6e7f5}.game-mode .game-top{font-size:8px;padding:8px 11px;background:#fff6e7ed;border-radius:2px}.game-mode #minimap{border-radius:2px;border-color:#fff0d9;box-shadow:0 0 0 2px #aa7a90}.game-mode .game-bottom{font-size:9px;border-radius:2px;background:#fff6e7e8}.game-mode .interact{border-radius:2px;background:#fff0df;border-color:#a16485;box-shadow:3px 3px #a1648533}.game-mode .room-exit{border-radius:2px}.npc-body .primary{border-radius:2px}
+
+@media(min-width:901px){.game-mode #minimap{width:140px;height:89px;left:50%;right:auto;bottom:14px;transform:translateX(-50%)}}
