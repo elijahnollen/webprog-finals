@@ -183,7 +183,7 @@ const socialLinks = [
   { label: "GitHub", href: "https://github.com/elijahnollen", icon: "/img/github.png" },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/elijah-nollen-527563321/",
+    href: "https://www.linkedin.com/in/elijahnollen/",
     icon: "/img/linkedin.png"
   },
   { label: "Email", href: "mailto:emnollen@student.apc.edu.ph", icon: "/img/outlook.png" }
