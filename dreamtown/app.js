@@ -66,7 +66,7 @@ function paintWorld(){rect(0,0,1200,760,'#b8d5a7');for(let i=0;i<6000;i++){const
  for(let i=0;i<80;i++){const x=80+rand()*1040,y=rand()>.5?333:460;if(x>530&&x<670)continue;flower(x,y,i%3?'#e996b7':'#fff3d1')}
  if(decorReady){drawDecor(g,2,537,335,125,104);drawDecor(g,5,72,470,65,90);drawDecor(g,7,899,545,48,45)}
  text('CURIOSITY LANE',400,404,9,'#b28e91');text('POSSIBILITY AVENUE',810,404,9,'#b28e91');
- rect(640,470,5,36,'#ad7e7f');rect(630,469,63,21,'#fff0d8');text('YOU ARE HERE',661,483,7,'#9a637d');
+
 }
 paintWorld();
 const panel=document.querySelector('#panel'),body=document.querySelector('#panelBody');let returnFocus=null;
