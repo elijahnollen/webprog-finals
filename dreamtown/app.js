@@ -2,13 +2,13 @@ const C=window.CONTENT, canvas=document.querySelector('#world'),ctx=canvas.getCo
 var spriteReady=false;var spriteAtlas=new Image();var decorReady=false;var decorAtlas=new Image();
 const bg=document.createElement('canvas');bg.width=1200;bg.height=760;const g=bg.getContext('2d');
 const places=[
- {id:'about',name:'The Dreamhouse',sub:'A little about Eli',x:155,y:185,w:155,h:100,color:'#f7a7c6',roof:'#db568d',sign:'ELI’S DREAMHOUSE',icon:'♡'},
+ {id:'about',name:'The Residence',sub:'A little about Eli',x:155,y:185,w:155,h:100,color:'#f7a7c6',roof:'#db568d',sign:'ELI’S RESIDENCE',icon:'♡'},
  {id:'education',name:'The Academy',sub:'Learning & leadership',x:390,y:170,w:140,h:100,color:'#edb7d8',roof:'#9b78b0',sign:'THE ACADEMY',icon:'✧'},
  {id:'skills',name:'The Data Studio',sub:'Tools of my trade',x:715,y:180,w:150,h:100,color:'#b6d5d2',roof:'#5f9d9d',sign:'DATA STUDIO',icon:'⌘'},
- {id:'hobbies',name:'The Pink Cinema',sub:'Movies & my bookshelf',x:950,y:190,w:150,h:95,color:'#f9bad1',roof:'#d05083',sign:'PINK CINEMA',icon:'★'},
+ {id:'hobbies',name:'The Cinema',sub:'Movies & my bookshelf',x:950,y:190,w:150,h:95,color:'#f9bad1',roof:'#d05083',sign:'CINEMA',icon:'★'},
  {id:'goals',name:'The Wishing Garden',sub:'Goals & big dreams',x:155,y:490,w:145,h:105,color:'#d4b5e2',roof:'#aa7bb8',sign:'WISHING GARDEN',icon:'✿'},
- {id:'gallery',name:'The Memory House',sub:'Snapshots of my world',x:390,y:510,w:145,h:100,color:'#f8d09d',roof:'#d78e81',sign:'MEMORY HOUSE',icon:'▧'},
- {id:'projects',name:'The Idea Atelier',sub:'A work in progress',x:715,y:515,w:150,h:100,color:'#efb2cd',roof:'#b96992',sign:'IDEA ATELIER',icon:'✎'},
+ {id:'gallery',name:'The Gallery',sub:'Snapshots of my world',x:390,y:510,w:145,h:100,color:'#f8d09d',roof:'#d78e81',sign:'MEMORY HOUSE',icon:'▧'},
+ {id:'projects',name:'The Workshop',sub:'A work in progress',x:715,y:515,w:150,h:100,color:'#efb2cd',roof:'#b96992',sign:'IDEA ATELIER',icon:'✎'},
  {id:'contact',name:'The Post Office',sub:'Let’s stay in touch',x:965,y:500,w:140,h:100,color:'#f3afbe',roof:'#d75d7d',sign:'POST OFFICE',icon:'✉'}
 ];
 const visited=new Set(),player={x:600,y:470},keys=new Set();let path=[],last=0,near=null,time=0,activeBuilding=null;
@@ -83,7 +83,7 @@ document.addEventListener('keydown',e=>{if(panel.open||!started)return;const k=e
 document.querySelectorAll('[data-dir]').forEach(b=>{const key={up:'w',down:'s',left:'a',right:'d'}[b.dataset.dir];b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys.add(key);path=[]};b.onpointerup=b.onpointercancel=()=>keys.delete(key)});
 document.querySelector('#interact').onclick=activateNear;
 function avatar(x,y,moving){const c=ctx;const bob=moving&&!reduced?Math.sin(time*14)*2:0;y+=bob;c.fillStyle='#71586844';c.beginPath();c.ellipse(x,y+4,12,4,0,0,Math.PI*2);c.fill();rect(x-7,y-33,14,18,'#754b46',c);rect(x-5,y-30,10,12,'#f0c2a3',c);rect(x-8,y-35,16,6,'#764d49',c);rect(x-6,y-24,3,2,'#704350',c);rect(x+3,y-24,2,2,'#704350',c);rect(x-6,y-17,12,13,'#ef70ab',c);rect(x-9,y-8,18,5,'#ed8db7',c);rect(x-9,y-16,3,9,'#f0c2a3',c);rect(x+6,y-16,3,9,'#f0c2a3',c);const step=moving&&!reduced?Math.sin(time*14)*2:0;rect(x-5,y-3+step,4,7,'#f1c6af',c);rect(x+2,y-3-step,4,7,'#f1c6af',c);rect(x-6,y+3+step,6,3,'#fff0e5',c);rect(x+2,y+3-step,6,3,'#fff0e5',c);rect(x+4,y-34,7,4,'#f593bd',c);rect(x+7,y-37,3,10,'#f593bd',c)}
-function frame(now){const dt=Math.min((now-last)/1000,.04);last=now;time=now/1000;let dx=0,dy=0;if(!panel.open&&started){dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);dy=(keys.has('s')||keys.has('arrowdown')?1:0)-(keys.has('w')||keys.has('arrowup')?1:0);if(!dx&&!dy&&path.length){const t=path[0],dist=Math.hypot(t[0]-player.x,t[1]-player.y);if(dist<4)path.shift();else{dx=(t[0]-player.x)/dist;dy=(t[1]-player.y)/dist}}const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len}const nx=player.x+dx*125*dt,ny=player.y+dy*125*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny}
+function frame(now){if(window.RPG)return;const dt=Math.min((now-last)/1000,.04);last=now;time=now/1000;let dx=0,dy=0;if(!panel.open&&started){dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);dy=(keys.has('s')||keys.has('arrowdown')?1:0)-(keys.has('w')||keys.has('arrowup')?1:0);if(!dx&&!dy&&path.length){const t=path[0],dist=Math.hypot(t[0]-player.x,t[1]-player.y);if(dist<4)path.shift();else{dx=(t[0]-player.x)/dist;dy=(t[1]-player.y)/dist}}const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len}const nx=player.x+dx*125*dt,ny=player.y+dy*125*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny}
  ctx.imageSmoothingEnabled=false;if(room){drawInterior();interiorDetails();window.ScenePolish?.roomDetails(ctx,room);window.Portfolio?.drawRoomDetails(ctx,room)}else ctx.drawImage(bg,0,0);if(path.length){const t=path[path.length-1];text('✧',t[0],t[1],18,'#c26093',ctx)}
  if(!room){window.TownLife?.draw(time);window.ScenePolish?.atmosphere(ctx,time)}avatar(player.x,player.y,!!(dx||dy));if(!room)text('ELI',player.x,player.y-45,9,'#8d4367',ctx);
  if(!room)window.TownLife?.markers();
@@ -101,13 +101,13 @@ let started=false,room=null,roomObjects=[];
 const roomReadButton=document.createElement('button');roomReadButton.className='room-exit room-read';roomReadButton.textContent='Read this room’s story ↗';roomReadButton.hidden=true;document.body.append(roomReadButton);roomReadButton.onclick=()=>showContent(room);
 const exitButton=document.createElement('button');exitButton.className='room-exit';exitButton.textContent='↙ Back to town';exitButton.hidden=true;document.body.append(exitButton);exitButton.onclick=leaveRoom;
 const layouts={
- about:{title:'Eli’s Dreamhouse',wall:'#f5b9d1',floor:'#f1d5cb',rug:'#e58db3',objects:[['My story','vanity',290,300],['Little joys','sofa',720,360],['A note from Eli','journal',490,230]]},
+ about:{title:'Eli’s Residence',wall:'#f5b9d1',floor:'#f1d5cb',rug:'#e58db3',objects:[['My story','vanity',290,300],['Little joys','sofa',720,360],['A note from Eli','journal',490,230]]},
  education:{title:'The Academy',wall:'#d7bfe5',floor:'#e5d5c9',rug:'#b896ce',objects:[['My education','books',270,270],['Proud moments','trophy',790,270],['Leadership','podium',520,390]]},
  skills:{title:'The Data Studio',wall:'#badbd7',floor:'#e7dace',rug:'#93c2c2',objects:[['My toolkit','computer',290,280],['Analytics corner','server',770,270],['Learning lab','workbench',530,420]]},
- hobbies:{title:'The Pink Cinema & Bookshop',wall:'#dd9dc1',floor:'#dcc1c5',rug:'#c66b9f',objects:[['Movie night','screen',500,225],['My bookshelf','bookcart',245,290],['The reading nook','readingchair',790,380]]},
+ hobbies:{title:'The Cinema & Bookshop',wall:'#dd9dc1',floor:'#dcc1c5',rug:'#c66b9f',objects:[['Movie night','screen',500,225],['My bookshelf','bookcart',245,290],['The reading nook','readingchair',790,380]]},
  goals:{title:'The Wishing Conservatory',wall:'#d4c4e3',floor:'#e9d9cf',rug:'#bd9acd',objects:[['Goals & dreams','flowers',285,310],['Milestones','timeline',780,280],['A purpose-driven life','telescope',530,410]]},
- gallery:{title:'The Memory House',wall:'#f5cfae',floor:'#efd4be',rug:'#e3a7a9',objects:[['My photo album','photos',260,270],['Campus memories','camera',780,300],['Little adventures','album',510,420]]},
- projects:{title:'The Idea Atelier',wall:'#e8b7d0',floor:'#e4cfd1',rug:'#c88cae',objects:[['Things I’ve made','blueprint',280,280],['The inspiration board','kanban',790,260],['What’s next','testbench',530,420]]},
+ gallery:{title:'The Gallery',wall:'#f5cfae',floor:'#efd4be',rug:'#e3a7a9',objects:[['My photo album','photos',260,270],['Campus memories','camera',780,300],['Little adventures','album',510,420]]},
+ projects:{title:'The Workshop',wall:'#e8b7d0',floor:'#e4cfd1',rug:'#c88cae',objects:[['Things I’ve made','blueprint',280,280],['The inspiration board','kanban',790,260],['What’s next','testbench',530,420]]},
  contact:{title:'The Post Office',wall:'#f2b9c8',floor:'#eed7c4',rug:'#e294b2',objects:[['Send a little hello','mailcounter',500,270],['Find me online','pigeonholes',265,390],['Letters & kindness','parcels',800,350]]}
 };
 function begin(){started=true;document.body.classList.remove('intro');document.querySelector('#bootScreen').hidden=true;document.querySelector('#startScreen').hidden=true;window.Portfolio?.updateGuide();canvas.focus({preventScroll:true})}

@@ -97,7 +97,7 @@
     chrome(back,`<button class="text-button" ${project?'data-project="'+project+'"':'data-section="'+back+'"'}>← Back to ${project?'project':sections.find(s=>s.id===back).label.toLowerCase()}</button><figure class="original-photo"><img src="${esc(localImage(src))}" alt="${esc(caption||'Portfolio photograph')}"><figcaption>${esc(caption||'')}</figcaption></figure>`);
   }
   function showGuide() {
-    show('DREAMTOWN / PORTFOLIO ROUTE',`<div class="town-guide"><p class="section-kicker">A CLEAR PATH THROUGH THE TOWN</p><h2>Meet the person. Explore the work.</h2><p>Follow the suggested route or choose a place. You can read the portfolio directly, or walk through its rooms.</p><div class="guide-list">${sections.map((s,i)=>{const p=places.find(p=>p.id===s.id);return `<article><span>${String(i+1).padStart(2,'0')}</span><div><h3>${s.label}</h3><p>${p.name}</p></div><button data-section="${s.id}">Read ↗</button><button data-room="${s.id}">Visit →</button></article>`}).join('')}</div></div>`);
+    show('PORTFOLIO TOWN / PORTFOLIO ROUTE',`<div class="town-guide"><p class="section-kicker">A CLEAR PATH THROUGH THE TOWN</p><h2>Meet the person. Explore the work.</h2><p>Follow the suggested route or choose a place. You can read the portfolio directly, or walk through its rooms.</p><div class="guide-list">${sections.map((s,i)=>{const p=places.find(p=>p.id===s.id);return `<article><span>${String(i+1).padStart(2,'0')}</span><div><h3>${s.label}</h3><p>${p.name}</p></div><button data-section="${s.id}">Read ↗</button><button data-room="${s.id}">Visit →</button></article>`}).join('')}</div></div>`);
     body.classList.remove('portfolio-body');body.classList.add('guide-body');panel.classList.add('portfolio-panel');hydrate();
   }
   function updateGuide() {
