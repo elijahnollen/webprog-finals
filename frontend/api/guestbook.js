@@ -10,7 +10,7 @@ export default async function handler(request, response) {
   try {
     const base = new URL(configured);
     if (base.protocol !== 'https:') throw new Error('HTTPS required');
-    endpoint = base.pathname.endsWith('/guestbook') ? base : new URL(`${base.pathname.replace(/\/$/, '')}/guestbook`, base);
+    endpoint = new URL('/api/guestbook', base);
   } catch (_) {
     return response.status(503).json({message: 'Guestbook is temporarily unavailable.'});
   }
