@@ -21,6 +21,12 @@
       ]
     }
   ],
+  "crons": [
+    {
+      "path": "/api/guestbook",
+      "schedule": "0 3 * * *"
+    }
+  ],
   "functions": {
     "api/[...all].ts": {
       "maxDuration": 30
